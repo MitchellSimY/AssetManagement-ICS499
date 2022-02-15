@@ -2,7 +2,7 @@ import * as React from "react";
 import BulletinCards from "../Components/BulletinCards"
 
 
-export default function Student() {
+export default function Home() {
 
     return (
         <div>

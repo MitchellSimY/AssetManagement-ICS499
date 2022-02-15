@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import SideBar from "./Sidebar"
-import { PersonCircle, MenuButtonWide } from 'react-bootstrap-icons';
+import { PersonCircle, MenuButtonWide, HouseDoorFill } from 'react-bootstrap-icons';
 
 export default function HeaderBar() {
 
@@ -14,22 +14,24 @@ export default function HeaderBar() {
 
 
     // Functions
-    function handleMenuClick(e) {
+    function handleHomeClick(e) {
         e.preventDefault();
+        window.location = "../";
+    }
 
-        console.log(showSideBar)
-        setShowSideBar(!showSideBar);
+    function handleLogin(e) {
+        e.preventDefault();
+        window.location = "../login";
     }
 
     return (
         <div>
-            {showSideBar ? <SideBar showSideBar={showSideBar} setShowSideBar={setShowSideBar}/> : ""}
             <nav class="navbar navbar-dark bg-dark justify-content-between" color="black" style={menuButtonStyles}>
 
                 {/* Left side of the nav bar */}
                 <div style={{ paddingLeft: '1em' }}>
-                    <button type="button" class="btn btn-outline-light" onClick={handleMenuClick} >
-                        <MenuButtonWide color="white" size={25} style={menuButtonStyles} />
+                    <button type="button" class="btn btn-outline-light" onClick={handleHomeClick} >
+                        <HouseDoorFill color="white" size={25} style={menuButtonStyles} />
                     </button>
                     <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" }}>
                         Option 1
@@ -38,8 +40,10 @@ export default function HeaderBar() {
 
                 {/* Right side of the nav bar */}
                 <div class="form-inline" >
-                    <div style={{ paddingRight: '1em' }}>
-                        <PersonCircle size={30} color="#c44dff" />
+                    <div style={{ paddingRight: '1em' }} onClick={handleLogin}>
+                        <button>
+                            <PersonCircle size={30} color="#c44dff" />
+                        </button>
                     </div>
                 </div>
             </nav>
