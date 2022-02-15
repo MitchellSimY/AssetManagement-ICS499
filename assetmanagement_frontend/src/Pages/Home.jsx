@@ -1,11 +1,16 @@
 import * as React from "react";
+import BulletinCards from "../Components/BulletinCards"
+
 
 export default function Student() {
 
     return (
         <div>
             <h2>
-                Hello you are home
+                Home Page
+                <div style={{paddingLeft: '1em' }}>
+                    <BulletinCards />
+                </div>
             </h2>
         </div>
     );
