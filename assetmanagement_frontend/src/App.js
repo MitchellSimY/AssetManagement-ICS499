@@ -9,6 +9,7 @@ function App() {
   return (
     <div>
       <HeaderBar />
+      
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
