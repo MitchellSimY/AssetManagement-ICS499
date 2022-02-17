@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useState } from "react";
 import { PersonCircle, HouseDoorFill } from 'react-bootstrap-icons';
 
 export default function HeaderBar() {
