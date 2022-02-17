@@ -52,9 +52,8 @@ export default function Register() {
             <h2>
                 Registration Form
             </h2>
-            <form data-toggle="validator" role="form">
+            <form>
                 <div class="input-group mb-3">
-
                     {/* USERNAME */}
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Desired Username</span>
@@ -78,6 +77,7 @@ export default function Register() {
                     <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required />
                 </div>
 
+                {/* CONFIRM EMAIL */}
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1" >Email</span>
@@ -85,6 +85,7 @@ export default function Register() {
                     <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" onChange={(e) => setEmail(e.target.value)} />
                 </div>
 
+                {/* CONFIRM Name */}
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">First Name</span>
@@ -92,6 +93,7 @@ export default function Register() {
                     <input type="text" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="basic-addon1" onChange={(e) => setFirstName(e.target.value)} required />
                 </div>
 
+                {/* CONFIRM LAST NAME */}
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Last Name</span>
