@@ -15,6 +15,11 @@ export default function Login() {
         console.log("Register button hit");
     }
 
+    /**
+     * INvestigate "3 time rule"
+     * 
+     * Add functionality to buttons
+     */
     return (
         <div style={styles}>
             <h2>
@@ -25,14 +30,14 @@ export default function Login() {
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Username</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required />
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Password</span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" />
+                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required />
                 </div>
 
                 <div style={{paddingLeft: '5rem'}}>

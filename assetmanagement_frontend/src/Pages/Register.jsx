@@ -14,16 +14,37 @@ export default function Register() {
     }
 
     // States
-    const [isAdminChecked, setIsAdminChecked] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setlastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [phone, setPhone] = useState("");
+    const [userName, setUserName] = useState("");
+
 
 
     // Function
     function handleRegister(e) {
-        console.log("Register button hit");
+        e.preventDefault();
+
+        const user = { firstName, lastName, email, password, phone, userName, isAdmin };
+
+        // Checking to ensure all fields are correct
+        // if ()
+
+        console.table(user);
+        fetch("http://localhost:8080/user/add", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(user),
+        }).then(() => {
+            console.log("New user added!");
+        });
     }
 
     function handleIsAdmin(e) {
-        setIsAdminChecked(!isAdminChecked);
+        setIsAdmin(!isAdmin);
     }
 
     return (
@@ -31,41 +52,58 @@ export default function Register() {
             <h2>
                 Registration Form
             </h2>
-            <form>
+            <form data-toggle="validator" role="form">
                 <div class="input-group mb-3">
+
+                    {/* USERNAME */}
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Desired Username</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setUserName(e.target.value)} required />
                 </div>
 
+                {/* PASSWORD */}
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Password</span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" />
+                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" onChange={(e) => setPassword(e.target.value)} required />
                 </div>
 
-
+                {/* CONFIRM PASSWORD */}
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Confirm Password</span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" />
+                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required />
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Email</span>
+                        <span class="input-group-text" id="basic-addon1" >Email</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" />
+                    <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" onChange={(e) => setEmail(e.target.value)} />
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">First Name</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="basic-addon1" onChange={(e) => setFirstName(e.target.value)} required />
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Last Name</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" aria-describedby="basic-addon1" onChange={(e) => setlastName(e.target.value)} required />
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Phone</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Phone" aria-label="Phone" aria-describedby="basic-addon1" />
+                    <input type="text" class="form-control" placeholder="Phone" aria-label="Phone" aria-describedby="basic-addon1" required onChange={(e) => setPhone(e.target.value)} />
                 </div>
 
                 <div class="input-group mb-3">
@@ -76,7 +114,7 @@ export default function Register() {
                             <input type="checkbox" aria-label="Checkbox for following text input" onChange={handleIsAdmin} />
                         </div>
                     </div> {" "}
-                    {isAdminChecked ?
+                    {isAdmin ?
                         <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Admin Key" /> : " "}
 
                 </div>
@@ -88,7 +126,7 @@ export default function Register() {
 
 
                 <br />
-                <button type="button" class="btn btn-primary">Create Account</button>{" "}
+                <button type="submit" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "}
 
 
 

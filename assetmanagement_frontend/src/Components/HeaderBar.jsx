@@ -1,11 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
-import SideBar from "./Sidebar"
-import { PersonCircle, MenuButtonWide, HouseDoorFill } from 'react-bootstrap-icons';
+import { PersonCircle, HouseDoorFill } from 'react-bootstrap-icons';
 
 export default function HeaderBar() {
-
-    const [showSideBar, setShowSideBar] = useState(false);
 
     // Styles
     const menuButtonStyles = {
