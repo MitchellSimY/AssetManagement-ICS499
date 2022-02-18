@@ -21,8 +21,21 @@ public class UserServiceImplementation implements UserService{
 
 	@Override
 	public List<UserModel> getAllUsers() {
-		
 		return userRepo.findAll();
+	}
+
+	@Override
+	public UserModel getUserLogin(String userName, String password) {
+		List<UserModel> listOfUsers = userRepo.findAll();
+		
+		for (UserModel user : listOfUsers) {
+			if (user.getUserName().equals(userName)) {
+				if (user.getPassword().equals(password)) {
+					return user;
+				}
+			}
+		}
+		return null;
 	}
 	
 }

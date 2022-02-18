@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import ReactRecaptcha from "react-recaptcha";
 
 
@@ -11,8 +12,25 @@ export default function Login() {
         margin: 'auto',
     }
 
-    function handleRegister(e) {
-        console.log("Register button hit");
+    // States
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const [user, setUser] = useState([]);
+
+    function handleSignIn(e) {
+        e.preventDefault();
+
+        fetch(`http://localhost:8080/user/getUserLogin/${userName}/${password}`)
+            .then((res) => res.json())
+            .then((result) => {
+                setUser(result);
+        });
+        
+        console.table(user);
+    }
+
+    function handleForgotPassword(e) {
+        e.preventDefault();
     }
 
     /**
@@ -30,14 +48,14 @@ export default function Login() {
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Username</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required />
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setUserName(e.target.value)} required />
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Password</span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required />
+                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" onChange={(e) => setPassword(e.target.value)} required />
                 </div>
 
                 <div style={{paddingLeft: '5rem'}}>
@@ -47,14 +65,14 @@ export default function Login() {
                 </div>
 
 
-                <button type="button" class="btn btn-primary">Sign In</button>{" "}
-                <button type="button" class="btn btn-secondary">Forgot Password</button>
+                <button type="button" class="btn btn-primary" onClick={handleSignIn}>Sign In</button>{" "}
+                <button type="button" class="btn btn-secondary" onClick={handleForgotPassword}>Forgot Password</button>
 
 
             </form>
             <br />
             Don't have an account? <br />
-            <a onClick={handleRegister} href="../register">Register now</a>
+            <a href="../register">Register now</a>
         </div>
     );
 }
