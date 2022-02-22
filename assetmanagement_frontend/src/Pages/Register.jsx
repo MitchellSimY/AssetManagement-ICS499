@@ -1,9 +1,12 @@
 import * as React from "react";
+import { useContext } from "react";
 import { useState } from "react";
 import ReactRecaptcha from "react-recaptcha";
+import { UserContext } from "../Components/UserContext";
 
 
 export default function Register() {
+    const {user, setUser} = useContext(UserContext);
 
     // Styles
     const styles = {
@@ -49,10 +52,11 @@ export default function Register() {
 
     return (
         <div style={styles}>
+            {user}
             <h2>
                 Registration Form
             </h2>
-            <form>
+            <form required> 
                 <div class="input-group mb-3">
                     {/* USERNAME */}
                     <div class="input-group-prepend">
@@ -128,7 +132,7 @@ export default function Register() {
 
 
                 <br />
-                <button type="submit" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "}
+                <button type="submit" class="btn btn-primary" onSubmit={handleRegister}>Create Account</button>{" "}
 
 
 
