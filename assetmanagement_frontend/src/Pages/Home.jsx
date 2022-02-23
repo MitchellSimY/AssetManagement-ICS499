@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 
 export default function Home() {
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
 
     function clearStorage(e) {
@@ -20,7 +20,6 @@ export default function Home() {
             <h2>
                 Home Page <br />
             </h2>
-            {/* {JSON.stringify(user, null, 2 )} */}
             <div>
                 <BulletinCards />
             </div>
