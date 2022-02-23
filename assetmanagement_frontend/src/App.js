@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home.jsx";
@@ -7,9 +7,6 @@ import Register from "./Pages/Register.jsx"
 import HeaderBar from "./Components/HeaderBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { UserContext } from "./Components/UserContext";
-import { useState } from "react";
-import { useEffect } from "react";
-
 
 function App() {
   const [user, setUser] = useState(null);

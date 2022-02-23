@@ -1,8 +1,6 @@
 import * as React from "react";
-import { useContext } from "react";
 import { useState } from "react";
 import ReactRecaptcha from "react-recaptcha";
-import { UserContext } from "../Components/UserContext";
 
 
 export default function Register() {
