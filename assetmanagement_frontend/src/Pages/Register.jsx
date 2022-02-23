@@ -6,8 +6,6 @@ import { UserContext } from "../Components/UserContext";
 
 
 export default function Register() {
-    const {user, setUser} = useContext(UserContext);
-
     // Styles
     const styles = {
         textAlign: 'center',
@@ -52,7 +50,6 @@ export default function Register() {
 
     return (
         <div style={styles}>
-            {user}
             <h2>
                 Registration Form
             </h2>

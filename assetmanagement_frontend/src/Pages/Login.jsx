@@ -64,9 +64,9 @@ export default function Login() {
                 </div>
 
                 <div style={{ paddingLeft: '5rem' }}>
-                    {/* <ReactRecaptcha
-                        sitekey="6Ld1pH4eAAAAAFIC4kFwj442OYAwlqjlw4f4kMZC"
-                    /> */}
+                    <ReactRecaptcha
+                        sitekey="6Ld1pH4eAAAAAFIC4kFwj442OYAwlqjlw4f4kMZC" required
+                    />
                 </div>
 
 
