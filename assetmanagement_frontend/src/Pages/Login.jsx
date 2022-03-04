@@ -2,12 +2,14 @@ import * as React from "react";
 import { useContext, useState } from "react";
 import ReactRecaptcha from "react-recaptcha";
 import { UserContext } from "../Components/UserContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
+
+
 
 
 
 export default function Login() {
-
+    let navigate = useNavigate();
     const { user, setUser } = useContext(UserContext);
 
     const styles = {
@@ -29,7 +31,9 @@ export default function Login() {
                 setUser(result);
                 console.log(user);
             });
+        navigate(`../`);
 
+        
         
     }
 
@@ -69,11 +73,7 @@ export default function Login() {
                     />
                 </div>
 
-
-
-                {/* <Link to="../"> */}
-                    <button type="submit" onSubmit={handleSignIn}class="btn btn-primary">Sign In</button>{" "}
-                {/* </Link> */}
+                    <button type="submit" class="btn btn-primary">Sign In</button>{" "}
 
                 <button type="button" class="btn btn-secondary" onClick={handleForgotPassword}>Forgot Password</button>
 

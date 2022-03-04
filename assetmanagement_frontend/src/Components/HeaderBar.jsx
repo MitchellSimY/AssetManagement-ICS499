@@ -2,14 +2,25 @@ import * as React from "react";
 import { useContext, useState } from "react";
 import { PersonCircle, HouseDoorFill } from 'react-bootstrap-icons';
 import { UserContext } from "./UserContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function HeaderBar() {
-    const [user, setUser] = useState(null);
+    let navigate = useNavigate();
+    const { user } = useContext(UserContext);
 
     // Styles
     const menuButtonStyles = {
         backgroundColor: 'linear-gradient(#e66465, #9198e5)',
+    }
+
+    function handlePersonCircle(e) {
+        e.preventDefault();
+
+        if (user) {
+            navigate("../profile");
+        } else {
+            navigate("../login")
+        }
     }
 
     return (
@@ -30,13 +41,13 @@ export default function HeaderBar() {
 
                 {/* Right side of the nav bar */}
                 <div class="form-inline" >
-                    <Link to="../login">
+
+                    {/* <Link to="../login">  */}
                         <div style={{ paddingRight: '1em' }}>
-                            <button>
+                            <button onClick={handlePersonCircle}>
                                 <PersonCircle size={30} color="#c44dff" />
                             </button>
                         </div>
-                    </Link>
                 </div>
             </nav>
 
