@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import ReactRecaptcha from "react-recaptcha";
+import {useNavigate} from "react-router-dom";
 
 
 export default function Register() {
@@ -21,7 +22,7 @@ export default function Register() {
     const [phone, setPhone] = useState("");
     const [userName, setUserName] = useState("");
 
-
+    let navigate = useNavigate();
 
     // Function
     function handleRegister(e) {
@@ -40,6 +41,8 @@ export default function Register() {
         }).then(() => {
             console.log("New user added!");
         });
+
+        navigate("../")
     }
 
     function handleIsAdmin(e) {

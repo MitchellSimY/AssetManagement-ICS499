@@ -10,6 +10,4 @@ public interface UserService {
 	public List<UserModel> getAllUsers();
 
 	public UserModel getUserLogin(String userName, String password);
-
-
 }
