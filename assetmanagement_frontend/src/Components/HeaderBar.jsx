@@ -25,7 +25,7 @@ export default function HeaderBar() {
 
     function navigateAsset(e) {
         e.preventDefault();
-        navigate("../addAsset");
+        navigate("../viewAllAssets");
     }
 
     return (
@@ -34,13 +34,13 @@ export default function HeaderBar() {
 
                 {/* Left side of the nav bar */}
                 <div style={{ paddingLeft: '1em' }}>
-                    <Link to="../">
+                    <Link to="../home">
                         <button type="button" class="btn btn-outline-light">
                             <HouseDoorFill color="white" size={25} style={menuButtonStyles} />
                         </button>
                     </Link>
                     <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" }} onClick={navigateAsset}>
-                        Add Assets
+                        Assets
                     </a>
 
                     <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" }}>

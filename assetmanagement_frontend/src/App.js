@@ -9,6 +9,7 @@ import Profle from "./Pages/Profile.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { UserContext } from "./Components/UserContext";
 import AddAsset from "./Pages/Assets/AddAssets";
+import ViewAssets from "./Pages/Assets/ViewAssets";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -36,6 +37,8 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profle />} />
             <Route path="/addAsset" element={<AddAsset />} />
+            <Route path="/viewAllAssets" element={<ViewAssets />} />
+            
           </Routes>
 
         </div>

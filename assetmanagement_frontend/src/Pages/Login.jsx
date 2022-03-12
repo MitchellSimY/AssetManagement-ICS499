@@ -4,10 +4,6 @@ import ReactRecaptcha from "react-recaptcha";
 import { UserContext } from "../Components/UserContext";
 import { Link, useNavigate} from "react-router-dom";
 
-
-
-
-
 export default function Login() {
     let navigate = useNavigate();
     const { user, setUser } = useContext(UserContext);
@@ -32,9 +28,6 @@ export default function Login() {
                 console.log(user);
             });
         navigate(`../home`);
-
-        
-        
     }
 
     function handleForgotPassword(e) {
@@ -43,8 +36,7 @@ export default function Login() {
     }
 
     /**
-     * INvestigate "3 time rule"
-     * 
+     * Investigate "3 time rule"
      * Add functionality to buttons
      */
     return (
