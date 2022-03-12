@@ -31,7 +31,7 @@ export default function Login() {
                 setUser(result);
                 console.log(user);
             });
-        navigate(`../`);
+        navigate(`../home`);
 
         
         

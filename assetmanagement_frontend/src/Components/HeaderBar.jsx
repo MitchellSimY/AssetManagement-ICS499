@@ -19,8 +19,13 @@ export default function HeaderBar() {
         if (user) {
             navigate("../profile");
         } else {
-            navigate("../login")
+            navigate("../")
         }
+    }
+
+    function navigateAsset(e) {
+        e.preventDefault();
+        navigate("../addAsset");
     }
 
     return (
@@ -34,9 +39,14 @@ export default function HeaderBar() {
                             <HouseDoorFill color="white" size={25} style={menuButtonStyles} />
                         </button>
                     </Link>
-                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" }}>
-                        Option 1
+                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" }} onClick={navigateAsset}>
+                        Add Assets
                     </a>
+
+                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" }}>
+                    {/* {user.admin ? "Is admin" : "Not admin"} */}
+                    </a>
+
                 </div>
 
                 {/* Right side of the nav bar */}

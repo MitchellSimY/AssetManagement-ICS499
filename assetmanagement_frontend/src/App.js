@@ -8,6 +8,7 @@ import HeaderBar from "./Components/HeaderBar";
 import Profle from "./Pages/Profile.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { UserContext } from "./Components/UserContext";
+import AddAsset from "./Pages/Assets/AddAssets";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -30,10 +31,11 @@ function App() {
 
           <HeaderBar />
           <Routes>
-            <Route path="/" element={<Home />} exact />
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} exact />
+            <Route path="/home" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profle />} />
+            <Route path="/addAsset" element={<AddAsset />} />
           </Routes>
 
         </div>
