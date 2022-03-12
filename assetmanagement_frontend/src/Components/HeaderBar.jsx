@@ -34,7 +34,7 @@ export default function HeaderBar() {
 
                 {/* Left side of the nav bar */}
                 <div style={{ paddingLeft: '1em' }}>
-                    <Link to="../">
+                    <Link to="../home">
                         <button type="button" class="btn btn-outline-light">
                             <HouseDoorFill color="white" size={25} style={menuButtonStyles} />
                         </button>
