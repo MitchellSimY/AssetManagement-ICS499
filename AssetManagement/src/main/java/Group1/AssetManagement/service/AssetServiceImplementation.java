@@ -23,7 +23,7 @@ public class AssetServiceImplementation implements AssetService {
 	public List<AssetModel> getAllAssets() {
 		return assetRepo.findAll();
 	}
-
+//
 	@Override
 	public AssetModel getAsset(Integer id) {
 		

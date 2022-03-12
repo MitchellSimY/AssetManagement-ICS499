@@ -7,5 +7,5 @@ import Group1.AssetManagement.model.AssetModel;
 
 @Repository
 public interface AssetRepository extends JpaRepository <AssetModel, Integer>{
-	
+	//
 }
