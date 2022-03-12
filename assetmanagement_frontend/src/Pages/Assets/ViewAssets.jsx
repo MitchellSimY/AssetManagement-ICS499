@@ -45,7 +45,6 @@ export default function AddAsset() {
   };
 
   function iconSelection(asset) {
-
     if (asset == "Laptop") {
       return <Laptop size={30} />
     } else if (asset == "Tablets") {
@@ -80,7 +79,7 @@ export default function AddAsset() {
           <table style={{ paddingRight: "10rem" }}>
             <thead>
               <tr>
-                <th scope="col"><h2>Asset Options</h2></th>
+                <th scope="col"><h2>Filter Asset Options</h2></th>
               </tr>
             </thead>
             <tr><h4>Test</h4></tr>
