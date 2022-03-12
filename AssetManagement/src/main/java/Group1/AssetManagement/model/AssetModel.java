@@ -8,21 +8,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-//
+
 @Entity
 public class AssetModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String deviceCategory, deviceName, deviceLocation;
+	private String deviceCategory, deviceName, deviceLocation, deviceDescription;
 	
 	private Integer checkoutUserId;
 	
 	@JsonProperty("isCheckedOut")
 	private boolean isCheckedOut;
-	
-//	private LocalDate checkoutDate;
 
 	public int getId() {
 		return id;
@@ -72,11 +70,11 @@ public class AssetModel {
 		this.isCheckedOut = isCheckedOut;
 	}
 
-//	public LocalDate getCheckoutDate() {
-//		return checkoutDate;
-//	}
-//
-//	public void setCheckoutDate(LocalDate checkoutDate) {
-//		this.checkoutDate = checkoutDate;
-//	}
+	public String getDeviceDescription() {
+		return deviceDescription;
+	}
+
+	public void setDeviceDescription(String deviceDescription) {
+		this.deviceDescription = deviceDescription;
+	}
 }
