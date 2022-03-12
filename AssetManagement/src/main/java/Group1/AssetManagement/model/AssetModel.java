@@ -17,12 +17,12 @@ public class AssetModel {
 	
 	private String deviceCategory, deviceName, deviceLocation;
 	
-	private int checkoutUserId;
+	private Integer checkoutUserId;
 	
 	@JsonProperty("isCheckedOut")
 	private boolean isCheckedOut;
 	
-	private LocalDate checkoutDate;
+//	private LocalDate checkoutDate;
 
 	public int getId() {
 		return id;
@@ -56,7 +56,7 @@ public class AssetModel {
 		this.deviceLocation = deviceLocation;
 	}
 
-	public int getCheckoutUserId() {
+	public Integer getCheckoutUserId() {
 		return checkoutUserId;
 	}
 
@@ -72,11 +72,11 @@ public class AssetModel {
 		this.isCheckedOut = isCheckedOut;
 	}
 
-	public LocalDate getCheckoutDate() {
-		return checkoutDate;
-	}
-
-	public void setCheckoutDate(LocalDate checkoutDate) {
-		this.checkoutDate = checkoutDate;
-	}
+//	public LocalDate getCheckoutDate() {
+//		return checkoutDate;
+//	}
+//
+//	public void setCheckoutDate(LocalDate checkoutDate) {
+//		this.checkoutDate = checkoutDate;
+//	}
 }
