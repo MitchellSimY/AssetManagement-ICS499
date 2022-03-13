@@ -10,6 +10,9 @@ export default function AddAsset() {
   // States
   const [allAssets, setAllAssets] = useState();
 
+  // Constants
+  let navigate = useNavigate();
+
   // On page load
   useEffect(() => {
     fetch(`http://localhost:8080/asset/getAllAssets`)
@@ -44,6 +47,11 @@ export default function AddAsset() {
     margin: "auto",
   };
 
+  function handleAddAsset(e) {
+    e.preventDefault();
+    navigate("../addAsset")
+  }
+
   function iconSelection(asset) {
     if (asset == "Laptop") {
       return <Laptop size={30} />
@@ -70,6 +78,12 @@ export default function AddAsset() {
   return (
     <div>
       <br />
+
+
+      <div style={{float: "right", paddingRight: "25em"}}>
+        <button type="button" class="btn btn-success" onClick={handleAddAsset}>Add Assets</button>
+      </div>
+
 
       <Grid container spacing={2}>
         <Grid item xs={1}>

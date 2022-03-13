@@ -18,7 +18,6 @@ export default function AddAsset() {
     "Tablets",
     "Headphones",
     "Storage Systems",
-    "Surge Protectors",
     "Speakers",
     "Monitors",
     "Docking Stations",
