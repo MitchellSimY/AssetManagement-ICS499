@@ -5,6 +5,7 @@ import { UserContext } from "../../Components/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function AddAsset() {
+  let nav = useNavigate()
   // States
   const [deviceName, setDeviceName] = useState("");
   const [deviceCategory, setDeviceCategory] = useState("");
@@ -42,8 +43,9 @@ export default function AddAsset() {
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(asset  ),
     }).then(() => {
-        console.log("New user added!");
+        console.log("New asset added!");
     });
+    nav("../viewAllAssets")
   }
 
   return (
