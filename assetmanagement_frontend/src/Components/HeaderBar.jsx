@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function HeaderBar() {
     let navigate = useNavigate();
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
     // Styles
     const menuButtonStyles = {
@@ -39,12 +39,11 @@ export default function HeaderBar() {
                             <HouseDoorFill color="white" size={25} style={menuButtonStyles} />
                         </button>
                     </Link>
-                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" }} onClick={navigateAsset}>
+                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" ,cursor:'pointer'}} onClick={navigateAsset}>
                         Assets
                     </a>
 
                     <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" }}>
-                    {/* {user.admin ? "Is admin" : "Not admin"} */}
                     </a>
 
                 </div>
