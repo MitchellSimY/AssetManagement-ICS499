@@ -18,7 +18,6 @@ export default function Home() {
         isAdmin = "";
     }
 
-
     function clearStorage(e) {
         e.preventDefault();
         setUser()

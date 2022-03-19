@@ -84,10 +84,9 @@ export default function AddAsset() {
   }
 
   function handleAssetClick(e) {
-    var chosenAsset = e.target.getAttribute("keyid")
-    console.table(e)
-    console.log(chosenAsset)
-
+    var chosenAssetId = e.target.getAttribute("keyid")
+    console.log(chosenAssetId)
+    navigate(`../assetDetails?id=${chosenAssetId}`)
   }
 
   return (
@@ -134,7 +133,6 @@ export default function AddAsset() {
 
           </table>
         </Grid>
-
         <Grid item xs={8}>
           <table class="table table-hover" style={tableStyle}>
             <thead>
@@ -164,7 +162,11 @@ export default function AddAsset() {
                       <th keyid={asset.id} scope="row">{iconSelection(asset.deviceCategory)}</th>
                       <td>{asset.deviceName}</td>
                       <td>{asset.deviceCategory}</td>
-                      <td><button type="button" class="btn btn-primary">Request</button> <InfoCircle size={25} onClick={handleAssetClick} keyid={asset.id}/></td>
+                      <td><button type="button" class="btn btn-primary">Request</button> 
+   
+                        <InfoCircle size={25} onClick={handleAssetClick} keyid={asset.id}/>
+
+                      </td>
                     </tr>
                   )
 

@@ -14,17 +14,16 @@ public class AssetServiceImplementation implements AssetService {
 	@Autowired
 	private AssetRepository assetRepo;
 	
-	@Override
+
 	public AssetModel saveAsset(AssetModel asset) {
 		return assetRepo.save(asset);
 	}
 
-	@Override
 	public List<AssetModel> getAllAssets() {
 		return assetRepo.findAll();
 	}
 //
-	@Override
+
 	public AssetModel getAsset(Integer id) {
 		
 		List<AssetModel> listOfAssets = assetRepo.findAll();

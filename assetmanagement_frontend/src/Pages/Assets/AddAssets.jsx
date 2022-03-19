@@ -6,10 +6,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function AddAsset() {
   let nav = useNavigate()
+
   // States
   const [deviceName, setDeviceName] = useState("");
   const [deviceCategory, setDeviceCategory] = useState("");
   const [deviceDescription, setDeviceDescription] = useState("");
+  const [deviceLocation, setDeviceLocation] = useState("");
 
   // Asset Type Options
   const assetTypesArray = [
@@ -31,20 +33,22 @@ export default function AddAsset() {
     margin: "auto",
   };
 
-  function test(e) {
+  function addToDatabase(e) {
     e.preventDefault();
 
-    const asset = {deviceName, deviceCategory, deviceDescription}
+    const asset = {deviceName, deviceCategory, deviceDescription, deviceLocation}
 
     console.table(asset);
 
     fetch("http://localhost:8080/asset/add", {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify(asset  ),
+        body: JSON.stringify(asset),
     }).then(() => {
         console.log("New asset added!");
     });
+
+    
     nav("../viewAllAssets")
   }
 
@@ -90,7 +94,7 @@ export default function AddAsset() {
           </select>
         </div>
 
-        {/* Device Location */}
+        {/* Device Description */}
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">
@@ -107,8 +111,29 @@ export default function AddAsset() {
             required
           />
         </div>
+        {/* End Of Device Description */}
 
-        <button onClick={test}>Add Asset</button>
+                {/* Device Location */}
+                <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">
+              Device Location
+            </span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Device Location"
+            aria-label="Asset Name"
+            aria-describedby="basic-addon1"
+            onChange={(e) => setDeviceLocation(e.target.value)}
+            required
+          />
+        </div>
+        {/* End Of Device Location */}
+
+
+        <button onClick={addToDatabase}>Add Asset</button>
       </form>
     </div>
   );
