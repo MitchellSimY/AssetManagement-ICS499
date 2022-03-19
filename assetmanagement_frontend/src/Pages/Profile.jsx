@@ -5,12 +5,11 @@ import { UserContext } from "../Components/UserContext";
 
 export default function Profile() {
     let navigate = useNavigate();
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
-    function handleSignOut(e) {
-        e.preventDefault();
-        localStorage.clear();
-        window.location.reload(false);
+    function handleSignOut() {
+        setUser();
+        navigate("../")
     }
 
     return (
@@ -20,9 +19,9 @@ export default function Profile() {
             </div>
 
 
-            <Link to="../login">
-                <button onClick={handleSignOut}>Log Out</button>
-            </Link>
+            <button onClick={handleSignOut}>
+                Log Out
+            </button>
         </div>
     )
 }

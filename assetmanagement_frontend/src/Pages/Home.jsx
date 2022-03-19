@@ -9,7 +9,7 @@ export default function Home() {
     let navigate = useNavigate();
 
 
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
     var isAdmin = null;
     if (user) {
@@ -21,9 +21,8 @@ export default function Home() {
 
     function clearStorage(e) {
         e.preventDefault();
-        localStorage.clear();
-        window.location.reload(false);
-        navigate(`../login`);
+        setUser()
+        navigate(`../`);
     }
 
     function testFunction(e) {
@@ -34,13 +33,30 @@ export default function Home() {
     }
 
     return (
-        <div style={{ paddingLeft: '1em' }}>
-            <h2>
-                Home Page <br />
+        <div style={{ paddingLeft: '2em' }}>
+            <h2 style={{paddingTop: '1em'}}>
+                Latest Announcements <br />
             </h2>
             <div>
                 <BulletinCards />
             </div>
+            
+            <br />
+            <h2>Pending Asset Requests</h2>
+
+                <br />
+                <br />
+                <br />
+                <br />
+
+                <h2>Pending IT Help</h2>
+
+                <br />
+                <br />
+                <br />
+                <br />
+
+                
             {user ? <div><h2>You are now logged in: </h2><h3>
             {user.firstName} {user.lastName} <br />
             {user.phone} <br />

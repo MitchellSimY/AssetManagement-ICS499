@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import ReactRecaptcha from "react-recaptcha";
-import {useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export default function Register() {
@@ -26,8 +26,6 @@ export default function Register() {
 
     // Function
     function handleRegister(e) {
-        e.preventDefault();
-
         const user = { firstName, lastName, email, password, phone, userName, isAdmin };
 
         // Checking to ensure all fields are correct
@@ -42,7 +40,7 @@ export default function Register() {
             console.log("New user added!");
         });
 
-        navigate("../")
+        navigate("../home")
     }
 
     function handleIsAdmin(e) {
@@ -54,7 +52,7 @@ export default function Register() {
             <h2>
                 Registration Form
             </h2>
-            <form required> 
+            <form required>
                 <div class="input-group mb-3">
                     {/* USERNAME */}
                     <div class="input-group-prepend">
@@ -130,7 +128,9 @@ export default function Register() {
 
 
                 <br />
-                <button type="submit" class="btn btn-primary" onSubmit={handleRegister}>Create Account</button>{" "}
+                <Link to="/">
+                    <button type="submit" class="btn btn-primary" onSubmit={handleRegister}>Create Account</button>{" "}
+                </Link>
 
 
 

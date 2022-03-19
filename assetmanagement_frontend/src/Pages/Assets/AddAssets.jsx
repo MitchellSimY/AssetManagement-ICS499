@@ -108,7 +108,7 @@ export default function AddAsset() {
           />
         </div>
 
-        <button onClick={test}>Print</button>
+        <button onClick={test}>Add Asset</button>
       </form>
     </div>
   );

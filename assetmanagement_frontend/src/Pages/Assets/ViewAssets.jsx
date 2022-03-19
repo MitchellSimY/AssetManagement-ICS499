@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useContext, useState, useEffect } from "react";
-import { Box, Headphones, Laptop, PersonWorkspace, Printer, Speaker, TabletLandscape, UsbDrive, Cast } from "react-bootstrap-icons";
+import { Box, Headphones, Laptop, PersonWorkspace, Printer, Speaker, TabletLandscape, UsbDrive, Cast, InfoLg, InfoCircle } from "react-bootstrap-icons";
 import { UserContext } from "../../Components/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid';
@@ -50,7 +50,7 @@ export default function AddAsset() {
     e.preventDefault();
     navigate("../addAsset")
   }
- 
+
   function filterChosen(e) {
     var chosenAssetType = e.target.getAttribute("keyid")
     if (chosenAssetType == "Show all options") {
@@ -70,7 +70,7 @@ export default function AddAsset() {
     } else if (asset === "Printer/Scanner") {
       return <Printer size={30} />
     } else if (asset === "Headphones") {
-      return <Headphones size={30}/>
+      return <Headphones size={30} />
     } else if (asset === "Storage Systems") {
       return <UsbDrive size={30} />
     } else if (asset === "Speakers") {
@@ -83,10 +83,17 @@ export default function AddAsset() {
     return asset;
   }
 
+  function handleAssetClick(e) {
+    var chosenAsset = e.target.getAttribute("keyid")
+    console.table(e)
+    console.log(chosenAsset)
+
+  }
+
   return (
     <div>
       <br />
-      <div style={{float: "right", paddingRight: "25em"}}>
+      <div style={{ float: "right", paddingRight: "25em" }}>
         <button type="button" class="btn btn-success" onClick={handleAddAsset}>Add Assets</button>
       </div>
 
@@ -103,26 +110,26 @@ export default function AddAsset() {
               </tr>
             </thead>
             <div class="input-group mb-3">
-          {/* Asset Name */}
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">
-              Search
-            </span>
-          </div>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Asset Name"
-            aria-label="Asset Name"
-            aria-describedby="basic-addon1"
-            onChange={(e) => setDeviceNameSearch(e.target.value)}
-            required
-          />
-        </div>
+              {/* Asset Name */}
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">
+                  Search
+                </span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Asset Name"
+                aria-label="Asset Name"
+                aria-describedby="basic-addon1"
+                onChange={(e) => setDeviceNameSearch(e.target.value)}
+                required
+              />
+            </div>
 
 
             {assetTypesArray.map((assetOption, index) => (
-              <tr><h4 onClick={filterChosen} style={{cursor:'pointer'}} keyid={assetOption}>{assetOption}</h4></tr>
+              <tr><h4 onClick={filterChosen} style={{ cursor: 'pointer' }} keyid={assetOption}>{assetOption}</h4></tr>
             ))}
 
           </table>
@@ -139,29 +146,30 @@ export default function AddAsset() {
             </thead>
             <tbody>
               {
-              allAssets ? allAssets.map(asset => {
-                if (!(asset.deviceName.toUpperCase().includes(deviceNameSearch.toUpperCase()))) {
-                  return null;
-                }
-
-                if (assetTypeFilter != '') {
-                  if (asset.deviceCategory != assetTypeFilter) {
+                allAssets ? allAssets.map(asset => {
+                  if (!(asset.deviceName.toUpperCase().includes(deviceNameSearch.toUpperCase()))) {
                     return null;
                   }
-                }
 
+                  if (assetTypeFilter != '') {
+                    if (asset.deviceCategory != assetTypeFilter) {
+                      return null;
+                    }
+                  }
 
-                return (
-                  <tr>
-                  <th scope="row">{iconSelection(asset.deviceCategory)}</th>
-                  <td>{asset.deviceName}</td>
-                  <td>{asset.deviceCategory}</td>
-                  <td><button type="button" class="btn btn-primary">Request</button></td>
-                </tr>
-                )
+                  // console.table(asset.id)
 
-              })
-              : ""}
+                  return (
+                    <tr keyid={asset.id}>
+                      <th keyid={asset.id} scope="row">{iconSelection(asset.deviceCategory)}</th>
+                      <td>{asset.deviceName}</td>
+                      <td>{asset.deviceCategory}</td>
+                      <td><button type="button" class="btn btn-primary">Request</button> <InfoCircle size={25} onClick={handleAssetClick} keyid={asset.id}/></td>
+                    </tr>
+                  )
+
+                })
+                  : ""}
             </tbody>
           </table>
         </Grid>
