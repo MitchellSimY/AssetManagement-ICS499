@@ -130,7 +130,7 @@ export default function AddAsset() {
             required
           />
         </div>
-        {/* End Of Device Description */}
+        {/* End Of Device Location */}
 
 
         <button onClick={addToDatabase}>Add Asset</button>
