@@ -1,8 +1,9 @@
 import * as React from "react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { PersonCircle, HouseDoorFill } from 'react-bootstrap-icons';
 import { UserContext } from "./UserContext";
 import { Link, useNavigate } from "react-router-dom";
+import HeaderStyle from "../Styles/HeaderBar/HeaderStyle.css"
 
 export default function HeaderBar() {
     let navigate = useNavigate();
@@ -11,6 +12,8 @@ export default function HeaderBar() {
     // Styles
     const menuButtonStyles = {
         backgroundColor: 'linear-gradient(#e66465, #9198e5)',
+    }
+    const textStyles = {
     }
 
     function handlePersonCircle(e) {
@@ -29,7 +32,7 @@ export default function HeaderBar() {
     }
 
     return (
-        <div>
+        <div style={HeaderStyle}>
             <nav class="navbar navbar-dark bg-dark justify-content-between" color="black" style={menuButtonStyles}>
 
                 {/* Left side of the nav bar */}

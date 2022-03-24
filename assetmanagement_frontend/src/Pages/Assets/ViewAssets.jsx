@@ -4,6 +4,8 @@ import { Box, Headphones, Laptop, PersonWorkspace, Printer, Speaker, TabletLands
 import { UserContext } from "../../Components/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid';
+import AssetStyles from "../../Styles/AssetStyles/AssetStyles.css"
+
 
 
 export default function AddAsset() {
@@ -90,7 +92,7 @@ export default function AddAsset() {
   }
 
   return (
-    <div>
+    <div style={AssetStyles}>
       <br />
       <div style={{ float: "right", paddingRight: "25em" }}>
         <button type="button" class="btn btn-success" onClick={handleAddAsset}>Add Assets</button>
