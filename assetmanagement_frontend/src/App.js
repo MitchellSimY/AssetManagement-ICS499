@@ -10,7 +10,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { UserContext } from "./Components/UserContext";
 import AddAsset from "./Pages/Assets/AddAssets";
 import ViewAssets from "./Pages/Assets/ViewAssets";
-import Chocolate from "./Pages/Assets/AssetDetailsPage";
+import AssetDetailsPage from "./Pages/Assets/AssetDetailsPage";
+import BulletinsPage from "./Pages/BulletinBoard/Board.jsx"
 
 function App() {
   const [user, setUser] = useState(null);
@@ -39,7 +40,9 @@ function App() {
             <Route path="/profile" element={<Profle />} />
             <Route path="/addAsset" element={<AddAsset />} />
             <Route path="/viewAllAssets" element={<ViewAssets />} />
-            <Route path="/assetDetails" element={<Chocolate />} />
+            <Route path="/assetDetails" element={<AssetDetailsPage />} />
+            
+            <Route path="/viewAllBulletins" element={<BulletinsPage />} />
             
           </Routes>
 

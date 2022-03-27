@@ -155,8 +155,6 @@ export default function AddAsset() {
                     }
                   }
 
-                  // console.table(asset.id)
-
                   return (
                     <tr keyid={asset.id}>
                       <th keyid={asset.id} scope="row">{iconSelection(asset.deviceCategory)}</th>

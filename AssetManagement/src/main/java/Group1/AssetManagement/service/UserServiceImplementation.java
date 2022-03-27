@@ -14,14 +14,17 @@ public class UserServiceImplementation implements UserService{
 	@Autowired
 	private UserRepository userRepo;
 	
+	@Override
 	public UserModel saveUser(UserModel user) {
 		return userRepo.save(user);
 	}
 
+	@Override
 	public List<UserModel> getAllUsers() {
 		return userRepo.findAll();
 	}
 
+	@Override
 	public UserModel getUserLogin(String userName, String password) {
 		List<UserModel> listOfUsers = userRepo.findAll();
 		

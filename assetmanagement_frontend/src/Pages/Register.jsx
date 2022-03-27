@@ -27,11 +27,8 @@ export default function Register() {
     // Function
     function handleRegister(e) {
         const user = { firstName, lastName, email, password, phone, userName, isAdmin };
-
-        // Checking to ensure all fields are correct
-        // if ()
-
         console.table(user);
+
         fetch("http://localhost:8080/user/add", {
             method: "POST",
             headers: { "Content-type": "application/json" },
@@ -39,7 +36,7 @@ export default function Register() {
         }).then(() => {
             console.log("New user added!");
         });
-
+        
         navigate("../home")
     }
 
@@ -129,9 +126,8 @@ export default function Register() {
 
                 <br />
                 <Link to="/">
-                    <button type="submit" class="btn btn-primary" onSubmit={handleRegister}>Create Account</button>{" "}
+                    <button type="submit" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "}
                 </Link>
-
 
 
 

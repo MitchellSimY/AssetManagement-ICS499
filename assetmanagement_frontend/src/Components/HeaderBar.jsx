@@ -28,6 +28,11 @@ export default function HeaderBar() {
         navigate("../viewAllAssets");
     }
 
+    function naviagteBulletins(e){
+        e.preventDefault();
+        navigate("../viewAllBulletins");
+    }
+
     return (
         <div>
             <nav class="navbar navbar-dark bg-dark justify-content-between" color="black" style={menuButtonStyles}>
@@ -39,8 +44,15 @@ export default function HeaderBar() {
                             <HouseDoorFill color="white" size={25} style={menuButtonStyles} />
                         </button>
                     </Link>
+
+                    {/* Assets Link */}
                     <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" ,cursor:'pointer'}} onClick={navigateAsset}>
                         Assets
+                    </a>
+
+                    {/* Bulletin Link */}
+                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" ,cursor:'pointer'}} onClick={naviagteBulletins}>                       
+                        Bulletins
                     </a>
 
                     <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" }}>
