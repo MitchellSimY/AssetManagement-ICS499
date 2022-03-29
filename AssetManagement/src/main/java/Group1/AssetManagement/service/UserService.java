@@ -5,7 +5,7 @@ import java.util.List;
 import Group1.AssetManagement.model.UserModel;
 
 public interface UserService {
-	public UserModel saveUser(UserModel user);
+	public boolean saveUser(UserModel user);
 	
 	public List<UserModel> getAllUsers();
 

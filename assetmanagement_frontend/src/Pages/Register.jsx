@@ -19,25 +19,37 @@ export default function Register() {
     const [lastName, setlastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
     const [phone, setPhone] = useState("");
     const [userName, setUserName] = useState("");
+
+    // Error states
+    const [successfulAdd, setSuccessfulAdd] = useState(true);
+    const [passwordMatch, setPasswordMatch] = useState(true);
 
     let navigate = useNavigate();
 
     // Function
     function handleRegister(e) {
         const user = { firstName, lastName, email, password, phone, userName, isAdmin };
-        console.table(user);
 
-        fetch("http://localhost:8080/user/add", {
-            method: "POST",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify(user),
-        }).then(() => {
-            console.log("New user added!");
-        });
-        
-        navigate("../home")
+        if (password !== passwordConfirm) {
+            setPasswordMatch(false);
+        } else {
+            fetch("http://localhost:8080/user/add", {
+                method: "POST",
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify(user),
+            }).then(response => response.json())
+                .then(data => setSuccessfulAdd(data));
+                
+        }
+
+        if (successfulAdd) {
+            navigate("../home")
+        }
+
+
     }
 
     function handleIsAdmin(e) {
@@ -50,6 +62,19 @@ export default function Register() {
                 Registration Form
             </h2>
             <form required>
+
+                {/* Username Checker */}
+                {successfulAdd ? "" : <div class="alert alert-danger" role="alert">
+                    The username you've entered has been taken
+                </div>}
+
+                {/* Password checker */}
+                {passwordMatch ? "" : <div class="alert alert-warning" role="alert">
+                    The passwords you've entered do not match!
+                </div>}
+
+
+
                 <div class="input-group mb-3">
                     {/* USERNAME */}
                     <div class="input-group-prepend">
@@ -71,7 +96,8 @@ export default function Register() {
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Confirm Password</span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required />
+                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1"
+                        onChange={(e) => setPasswordConfirm(e.target.value)} required />
                 </div>
 
                 {/* CONFIRM EMAIL */}
@@ -125,13 +151,14 @@ export default function Register() {
 
 
                 <br />
-                <Link to="/">
-                    <button type="submit" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "}
-                </Link>
+                {/* <Link to="/"> */}
+                <button type="button" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "}
+                {/* </Link> */}
 
 
 
             </form>
+
         </div>
     );
 }

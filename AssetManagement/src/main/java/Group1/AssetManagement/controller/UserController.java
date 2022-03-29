@@ -24,9 +24,9 @@ public class UserController {
 	
 	// Adding a user.
 	@PostMapping("/add")
-	public String add(@RequestBody UserModel user) {
-		userService.saveUser(user);
-		return "New user added";
+	public boolean add(@RequestBody UserModel user) {
+		
+		return userService.saveUser(user);
 	}
 	
 	// Getting all students
