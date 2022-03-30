@@ -22,6 +22,7 @@ export default function Register() {
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [phone, setPhone] = useState("");
     const [userName, setUserName] = useState("");
+    const [adminKey, setAdminKey] = useState("");
 
     // Error states
     const [successfulAdd, setSuccessfulAdd] = useState(true);
@@ -33,6 +34,12 @@ export default function Register() {
     // Function
     function handleRegister(e) {
         const user = { firstName, lastName, email, password, phone, userName, isAdmin };
+
+        if (adminKey != "iAdmin" && isAdmin) {
+            setWarningError(false);
+            setError("The Admin key you entered is incorrect")
+            return
+        }
 
         if (password.length < 8 ) {
             setWarningError(false);
@@ -115,7 +122,7 @@ export default function Register() {
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1" >Email</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" onChange={(e) => setEmail(e.target.value)} />
+                    <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" onChange={(e) => setEmail(e.target.value)} required/>
                 </div>
 
                 {/* CONFIRM Name */}
@@ -141,6 +148,7 @@ export default function Register() {
                     <input type="text" class="form-control" placeholder="Phone" aria-label="Phone" aria-describedby="basic-addon1" required onChange={(e) => setPhone(e.target.value)} />
                 </div>
 
+                {/* Is the user an admin? */}
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
 
@@ -150,11 +158,11 @@ export default function Register() {
                         </div>
                     </div> {" "}
                     {isAdmin ?
-                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Admin Key" /> : " "}
+                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Admin Key" onChange={(e) => setAdminKey(e.target.value)}/> : " "}
 
                 </div>
 
-                <div style={{ paddingLeft: '5rem' }}>
+                <div style={{ paddingLeft: '5rem' }} required>
                     <ReactRecaptcha
                         sitekey="6Ld1pH4eAAAAAFIC4kFwj442OYAwlqjlw4f4kMZC" required />
                 </div>
