@@ -3,7 +3,10 @@ import { useContext, useState, useEffect } from "react";
 import { PersonCircle, HouseDoorFill } from "react-bootstrap-icons";
 import { UserContext } from "../../Components/UserContext";
 import { Link, useNavigate } from "react-router-dom";
-import AddBulletin from "../../Components/AddBulletin";
+import AddBulletin from "../BulletinBoard/AddBulletin.jsx";
+import Grid from '@mui/material/Grid';
+import BulletinCard from "../BulletinBoard/BulletinCards.jsx"
+
 
 export default function Board() {
   let nav = useNavigate()
@@ -17,7 +20,7 @@ export default function Board() {
       fetch(`http://localhost:8080/bulletin/getAllBulletins`)
         .then((res) => res.json())
         .then((result) => {
-          setAllBulletins(result);
+          setAllBulletins(result.reverse());
         });
     });
 
@@ -26,28 +29,27 @@ export default function Board() {
     setAddBulletinPopup(!addBulletinPop);
   }
 
-  function viewBulletins() {
-    console.table(allBulletins)
-  }
-
-  var x = "Hello";
-
   return (
-    <div>
-      This is the bulletin Page
-      <button onClick={createBulletin}>Create Bulletin</button>
+    <div style={{paddingLeft: '10rem', paddingRight: '10rem'}}>
+      <br/>
+      <button onClick={createBulletin} class="btn btn-success">Create Bulletin</button>
       { addBulletinPop ? <AddBulletin /> : "" }
+      <br/>
+      <br/>
+      <Grid container spacing={2}>
 
+          {allBulletins ? 
+            allBulletins.map((bulletin, index) => (
+              <Grid item xs={4}>
+                <BulletinCard title={bulletin.title} 
+                announcementType={bulletin.announcementType} 
+                bulletinText={bulletin.message}
+                bulletinId={bulletin.id}/>
+              </Grid>
+            )) : ""
+          } 
 
-      <br />
-      <br />
-      <br />
-      <button onClick={viewBulletins}>View all bulletins</button>
-
-      {}
-
-      {allBulletins ? `${allBulletins.title}` : "NO Data"}
-
+      </Grid>
     </div>
   );
 }

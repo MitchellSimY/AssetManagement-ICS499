@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useContext } from "react";
-import BulletinCards from "../Components/BulletinCards"
+import BulletinCards from "./BulletinBoard/BulletinCards.jsx"
 import { UserContext } from "../Components/UserContext";
 import { Link, useNavigate} from "react-router-dom";
 
