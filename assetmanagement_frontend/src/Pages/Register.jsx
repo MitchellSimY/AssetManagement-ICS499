@@ -25,7 +25,8 @@ export default function Register() {
 
     // Error states
     const [successfulAdd, setSuccessfulAdd] = useState(true);
-    const [passwordMatch, setPasswordMatch] = useState(true);
+    const [warningError, setWarningError] = useState(true);
+    const [error, setError] = useState("");
 
     let navigate = useNavigate();
 
@@ -33,28 +34,37 @@ export default function Register() {
     function handleRegister(e) {
         const user = { firstName, lastName, email, password, phone, userName, isAdmin };
 
+        if (password.length < 8 ) {
+            setWarningError(false);
+            setError("The password you've entered is not longer than 8 characters")
+            return
+        }
+
         if (password !== passwordConfirm) {
-            setPasswordMatch(false);
+            setWarningError(false);
+            setError("The passwords you've entered do not match!")
+
         } else {
             fetch("http://localhost:8080/user/add", {
                 method: "POST",
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify(user),
-            }).then(response => response.json())
-                .then(data => setSuccessfulAdd(data));
-                
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        navigate("../home")
+                    } else {
+                        setSuccessfulAdd(false);
+                    }
+                });
         }
-
-        if (successfulAdd) {
-            navigate("../home")
-        }
-
-
     }
 
     function handleIsAdmin(e) {
         setIsAdmin(!isAdmin);
     }
+
 
     return (
         <div style={styles}>
@@ -69,8 +79,8 @@ export default function Register() {
                 </div>}
 
                 {/* Password checker */}
-                {passwordMatch ? "" : <div class="alert alert-warning" role="alert">
-                    The passwords you've entered do not match!
+                {warningError ? "" : <div class="alert alert-warning" role="alert">
+                    {`${error}`}
                 </div>}
 
 
@@ -151,14 +161,8 @@ export default function Register() {
 
 
                 <br />
-                {/* <Link to="/"> */}
-                <button type="button" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "}
-                {/* </Link> */}
-
-
-
+                <button type="submit" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "}
             </form>
-
         </div>
     );
 }
