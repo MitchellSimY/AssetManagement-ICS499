@@ -19,8 +19,15 @@ export default function Register() {
     const [lastName, setlastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
     const [phone, setPhone] = useState("");
     const [userName, setUserName] = useState("");
+    const [adminKey, setAdminKey] = useState("");
+
+    // Error states
+    const [successfulAdd, setSuccessfulAdd] = useState(true);
+    const [warningError, setWarningError] = useState(true);
+    const [error, setError] = useState("");
 
     let navigate = useNavigate();
 
@@ -28,24 +35,43 @@ export default function Register() {
     function handleRegister(e) {
         const user = { firstName, lastName, email, password, phone, userName, isAdmin };
 
-        // Checking to ensure all fields are correct
-        // if ()
+        if (adminKey != "iAdmin" && isAdmin) {
+            setWarningError(false);
+            setError("The Admin key you entered is incorrect")
+            return
+        }
 
-        console.table(user);
-        fetch("http://localhost:8080/user/add", {
-            method: "POST",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify(user),
-        }).then(() => {
-            console.log("New user added!");
-        });
+        if (password.length < 8 ) {
+            setWarningError(false);
+            setError("The password you've entered is not longer than 8 characters")
+            return
+        }
 
-        navigate("../home")
+        if (password !== passwordConfirm) {
+            setWarningError(false);
+            setError("The passwords you've entered do not match!")
+
+        } else {
+            fetch("http://localhost:8080/user/add", {
+                method: "POST",
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify(user),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        navigate("../home")
+                    } else {
+                        setSuccessfulAdd(false);
+                    }
+                });
+        }
     }
 
     function handleIsAdmin(e) {
         setIsAdmin(!isAdmin);
     }
+
 
     return (
         <div style={styles}>
@@ -53,6 +79,19 @@ export default function Register() {
                 Registration Form
             </h2>
             <form required>
+
+                {/* Username Checker */}
+                {successfulAdd ? "" : <div class="alert alert-danger" role="alert">
+                    The username you've entered has been taken
+                </div>}
+
+                {/* Password checker */}
+                {warningError ? "" : <div class="alert alert-warning" role="alert">
+                    {`${error}`}
+                </div>}
+
+
+
                 <div class="input-group mb-3">
                     {/* USERNAME */}
                     <div class="input-group-prepend">
@@ -74,7 +113,8 @@ export default function Register() {
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Confirm Password</span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required />
+                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1"
+                        onChange={(e) => setPasswordConfirm(e.target.value)} required />
                 </div>
 
                 {/* CONFIRM EMAIL */}
@@ -82,7 +122,7 @@ export default function Register() {
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1" >Email</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" onChange={(e) => setEmail(e.target.value)} />
+                    <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" onChange={(e) => setEmail(e.target.value)} required/>
                 </div>
 
                 {/* CONFIRM Name */}
@@ -108,6 +148,7 @@ export default function Register() {
                     <input type="text" class="form-control" placeholder="Phone" aria-label="Phone" aria-describedby="basic-addon1" required onChange={(e) => setPhone(e.target.value)} />
                 </div>
 
+                {/* Is the user an admin? */}
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
 
@@ -117,24 +158,18 @@ export default function Register() {
                         </div>
                     </div> {" "}
                     {isAdmin ?
-                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Admin Key" /> : " "}
+                        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Admin Key" onChange={(e) => setAdminKey(e.target.value)}/> : " "}
 
                 </div>
 
-                <div style={{ paddingLeft: '5rem' }}>
+                <div style={{ paddingLeft: '5rem' }} required>
                     <ReactRecaptcha
                         sitekey="6Ld1pH4eAAAAAFIC4kFwj442OYAwlqjlw4f4kMZC" required />
                 </div>
 
 
                 <br />
-                <Link to="/">
-                    <button type="submit" class="btn btn-primary" onSubmit={handleRegister}>Create Account</button>{" "}
-                </Link>
-
-
-
-
+                <button type="submit" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "}
             </form>
         </div>
     );

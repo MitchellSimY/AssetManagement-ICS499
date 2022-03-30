@@ -24,9 +24,9 @@ public class UserController {
 	
 	// Adding a user.
 	@PostMapping("/add")
-	public String add(@RequestBody UserModel user) {
-		userService.saveUser(user);
-		return "New user added";
+	public boolean add(@RequestBody UserModel user) {
+		
+		return userService.saveUser(user);
 	}
 	
 	// Getting all students
@@ -38,8 +38,14 @@ public class UserController {
 	// Get where username and password match
 	@GetMapping("/getUserLogin/{userName}/{password}")
 	public UserModel getUserLogin(@PathVariable String userName, @PathVariable String password) {
+		System.out.println("UserName: " + userName + ", Password:" + password);
 		return userService.getUserLogin(userName, password);
 	}
+	
+    @RequestMapping("/")
+    public String errors(){
+        return "Error Found ";
+    }
 	
 	
 }

@@ -81,12 +81,16 @@ export default function AddAsset() {
               Asset Type
             </span>
           </div>
+
+          {/* The actual dropdown */}
           <select
             id="inputState"
             class="form-control"
             value={deviceCategory}
             onChange={(e) => setDeviceCategory(e.target.value)}
           >
+
+            {/* Drop down options */}
             <option value=""></option>
             {assetTypesArray.map((assetType, index) => (
               <option value={assetType}>{assetType}</option>
