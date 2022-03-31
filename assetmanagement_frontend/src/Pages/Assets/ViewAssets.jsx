@@ -1,9 +1,12 @@
 import * as React from "react";
-import { useContext, useState, useEffect } from "react";
-import { Box, Headphones, Laptop, PersonWorkspace, Printer, Speaker, TabletLandscape, UsbDrive, Cast, InfoLg, InfoCircle } from "react-bootstrap-icons";
+import { useState, useEffect } from "react";
+import { Box, Headphones, Laptop, PersonWorkspace, Printer, Speaker, TabletLandscape, UsbDrive, Cast, InfoCircle } from "react-bootstrap-icons";
 import { UserContext } from "../../Components/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid';
+import RequestPopup from "../AssetRequest/RequestPopup";
+import { Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 
 export default function AddAsset() {
@@ -11,6 +14,14 @@ export default function AddAsset() {
   const [allAssets, setAllAssets] = useState();
   const [assetTypeFilter, setAssetTypeFilter] = useState('');
   const [deviceNameSearch, setDeviceNameSearch] = useState('');
+  const [openPopup, setOpenPopup] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+
+  const [requestedAsset, setRequestedAsset] = useState();
+
+  // Modal configuration
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
 
   // Constants
   let navigate = useNavigate();
@@ -20,7 +31,7 @@ export default function AddAsset() {
     fetch(`http://localhost:8080/asset/getAllAssets`)
       .then((res) => res.json())
       .then((result) => {
-        setAllAssets(result);
+        setAllAssets(result.reverse());
       });
   });
 
@@ -83,19 +94,32 @@ export default function AddAsset() {
     return asset;
   }
 
-  function handleAssetClick(e) {
-    var chosenAssetId = e.target.getAttribute("keyid")
-    console.log(chosenAssetId)
-    navigate(`../assetDetails?id=${chosenAssetId}`)
+  function handleAssetInfoClick(asset) {
+    setRequestedAsset(asset);
+    if (show) {
+      setShow(false);
+    }
+    setShowDetails(true);
+    setShow(true);
+    setOpenPopup(!openPopup)
+
+  }
+
+  function handleRequest(asset) {
+    setRequestedAsset(asset);
+    setShowDetails(false);
+    setShow(!show);
+
+    setOpenPopup(!openPopup)
   }
 
   return (
     <div>
+      {openPopup ? <RequestPopup show={show} handleClose={handleClose} asset={requestedAsset} showDetails={showDetails}/> : ""}
       <br />
       <div style={{ float: "right", paddingRight: "25em" }}>
         <button type="button" class="btn btn-success" onClick={handleAddAsset}>Add Assets</button>
       </div>
-
 
       <Grid container spacing={2}>
         <Grid item xs={1}>
@@ -143,6 +167,8 @@ export default function AddAsset() {
               </tr>
             </thead>
             <tbody>
+
+
               {
                 allAssets ? allAssets.map(asset => {
                   if (!(asset.deviceName.toUpperCase().includes(deviceNameSearch.toUpperCase()))) {
@@ -156,18 +182,32 @@ export default function AddAsset() {
                   }
 
                   return (
+                    
                     <tr keyid={asset.id}>
                       <th keyid={asset.id} scope="row">{iconSelection(asset.deviceCategory)}</th>
                       <td>{asset.deviceName}</td>
                       <td>{asset.deviceCategory}</td>
-                      <td><button type="button" class="btn btn-primary">Request</button> 
-   
-                        <InfoCircle size={25} onClick={handleAssetClick} keyid={asset.id}/>
+                      <td>
+
+                        <Button
+                          variant="primary"
+                          object={asset}
+                          id={asset.id}
+                          onClick={() => {
+                            handleRequest(asset);
+                          }}>
+                          Request
+                        </Button>
+
+                          {" "}
+                        <InfoCircle size={30} 
+                        onClick={() => {
+                          handleAssetInfoClick(asset)}} 
+                          keyid={asset.id} />
 
                       </td>
                     </tr>
                   )
-
                 })
                   : ""}
             </tbody>

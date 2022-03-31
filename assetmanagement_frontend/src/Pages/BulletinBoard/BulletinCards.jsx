@@ -19,7 +19,7 @@ export default function BulletinCards({title, announcementType, bulletinText, bu
                 <Card.Text>
                     {bulletinText}
                     <br />
-                    <button class="btn btn-light" onClick={deleteBulletin}>Delete</button>
+                    <button class="btn btn-danger" onClick={deleteBulletin}>Delete</button>
                 </Card.Text>
             </Card.Body>
         </Card>

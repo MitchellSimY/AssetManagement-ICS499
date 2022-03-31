@@ -30,7 +30,7 @@ export default function Board() {
   }
 
   return (
-    <div style={{paddingLeft: '10rem', paddingRight: '10rem'}}>
+    <div style={{paddingLeft: '20rem', paddingRight: '20rem'}}>
       <br/>
       <button onClick={createBulletin} class="btn btn-success">Create Bulletin</button>
       { addBulletinPop ? <AddBulletin /> : "" }
@@ -40,7 +40,7 @@ export default function Board() {
 
           {allBulletins ? 
             allBulletins.map((bulletin, index) => (
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <BulletinCard title={bulletin.title} 
                 announcementType={bulletin.announcementType} 
                 bulletinText={bulletin.message}
