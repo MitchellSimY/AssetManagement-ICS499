@@ -1,12 +1,10 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { Box, Headphones, Laptop, PersonWorkspace, Printer, Speaker, TabletLandscape, UsbDrive, Cast, InfoCircle } from "react-bootstrap-icons";
-import { UserContext } from "../../Components/UserContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 import RequestPopup from "../AssetRequest/RequestPopup";
 import { Button } from "react-bootstrap";
-import { Modal } from "react-bootstrap";
 
 
 export default function AddAsset() {
@@ -14,7 +12,6 @@ export default function AddAsset() {
   const [allAssets, setAllAssets] = useState();
   const [assetTypeFilter, setAssetTypeFilter] = useState('');
   const [deviceNameSearch, setDeviceNameSearch] = useState('');
-  const [openPopup, setOpenPopup] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
 
   const [requestedAsset, setRequestedAsset] = useState();
@@ -96,26 +93,19 @@ export default function AddAsset() {
 
   function handleAssetInfoClick(asset) {
     setRequestedAsset(asset);
-    if (show) {
-      setShow(false);
-    }
     setShowDetails(true);
     setShow(true);
-    setOpenPopup(!openPopup)
-
   }
 
   function handleRequest(asset) {
     setRequestedAsset(asset);
     setShowDetails(false);
-    setShow(!show);
-
-    setOpenPopup(!openPopup)
+    setShow(true);
   }
 
   return (
     <div>
-      {openPopup ? <RequestPopup show={show} handleClose={handleClose} asset={requestedAsset} showDetails={showDetails}/> : ""}
+      {show ? <RequestPopup show={show} handleClose={handleClose} asset={requestedAsset} showDetails={showDetails} /> : ""}
       <br />
       <div style={{ float: "right", paddingRight: "25em" }}>
         <button type="button" class="btn btn-success" onClick={handleAddAsset}>Add Assets</button>
@@ -182,7 +172,7 @@ export default function AddAsset() {
                   }
 
                   return (
-                    
+
                     <tr keyid={asset.id}>
                       <th keyid={asset.id} scope="row">{iconSelection(asset.deviceCategory)}</th>
                       <td>{asset.deviceName}</td>
@@ -199,10 +189,11 @@ export default function AddAsset() {
                           Request
                         </Button>
 
-                          {" "}
-                        <InfoCircle size={30} 
-                        onClick={() => {
-                          handleAssetInfoClick(asset)}} 
+                        {" "}
+                        <InfoCircle size={30}
+                          onClick={() => {
+                            handleAssetInfoClick(asset)
+                          }}
                           keyid={asset.id} />
 
                       </td>

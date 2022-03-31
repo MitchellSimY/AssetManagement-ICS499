@@ -1,8 +1,7 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { UserContext } from "../../Components/UserContext";
-import { Button } from "react-bootstrap";
-import { Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 
 export default function RequestPopup({ show, handleClose, asset, showDetails }) {
 

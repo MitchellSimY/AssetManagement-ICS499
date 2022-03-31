@@ -1,11 +1,7 @@
 import * as React from "react";
-import { useContext, useState } from "react";
-import { PersonCircle, HouseDoorFill } from "react-bootstrap-icons";
-// import { UserContext } from "../../Components/UserContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function AddBulletin() {
-  let nav = useNavigate()
 
   const [announcementType, setType] = useState("");
   const [message, setMessage] = useState("");
