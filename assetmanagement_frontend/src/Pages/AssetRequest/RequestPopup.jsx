@@ -1,17 +1,16 @@
 import * as React from "react";
 import { useState } from "react";
-import { UserContext } from "../../Components/UserContext";
 import { Button, Modal } from "react-bootstrap";
 
 export default function RequestPopup({ show, handleClose, asset, showDetails }) {
 
     const [toShow, setShow] = useState(show);
     const handleClosee = () => setShow(handleClose);
-    const [requestedAsset, setRequestedAsset] = useState(asset);
-    const [showAssetDetails, setShowAssetDetails] = useState(showDetails);
+    const [requestedAsset] = useState(asset);
+    const [showAssetDetails] = useState(showDetails);
 
-    function gang() {
-        console.table(requestedAsset);
+    function requestAsset() {
+        
     }
 
     return (
@@ -37,18 +36,15 @@ export default function RequestPopup({ show, handleClose, asset, showDetails }) 
                 // Show info
                 <Modal show={toShow} onHide={handleClosee}>
                     <Modal.Header closeButton>
-                        <Modal.Title>REQuesting</Modal.Title>
+                        <Modal.Title>Requesting</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                    <Modal.Body>Would you like to place a request for {requestedAsset.deviceName}?</Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClosee}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={handleClosee}>
-                            Request
-                        </Button>
-                        <Button variant="warning" onClick={gang}>
-                            click this bitch
+                        <Button variant="primary" onClick={requestAsset}>
+                            Confirm Request
                         </Button>
                     </Modal.Footer>
                 </Modal>
