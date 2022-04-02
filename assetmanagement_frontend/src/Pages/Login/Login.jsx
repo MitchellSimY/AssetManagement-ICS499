@@ -19,6 +19,7 @@ export default function Login() {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [captchaVerified, setCaptchaVerified] = useState(false);
+    const [captchaLoaded, setCaptchaLoaded] = useState(false)
 
     function handleSignIn(e) {
         e.preventDefault();
@@ -38,6 +39,10 @@ export default function Login() {
 
     function verifyCaptcha() {
         setCaptchaVerified(true);
+    }
+
+    function captchaLoad() {
+        setCaptchaLoaded(true);
     }
 
     /**
@@ -68,7 +73,7 @@ export default function Login() {
                     <ReactRecaptcha
                         sitekey="6Ld1pH4eAAAAAFIC4kFwj442OYAwlqjlw4f4kMZC"
                         verifyCallback={verifyCaptcha}
-                        required
+                        onloadCallback={() => setCaptchaLoaded(true)}
                     />
                 </div>
 
