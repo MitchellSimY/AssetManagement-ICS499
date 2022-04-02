@@ -9,5 +9,7 @@ public interface AssetService {
 	
 	public List<AssetModel> getAllAssets();
 	
+	public List<AssetModel> getAllAvailableAssets();
+	
 	public AssetModel getAsset(Integer id);
 }

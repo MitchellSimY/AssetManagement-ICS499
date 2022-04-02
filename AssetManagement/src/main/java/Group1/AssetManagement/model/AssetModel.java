@@ -18,9 +18,12 @@ public class AssetModel {
 	private String deviceCategory, deviceName, deviceLocation, deviceDescription;
 	
 	private Integer checkoutUserId;
-	
+
 	@JsonProperty("isCheckedOut")
 	private boolean isCheckedOut;
+	
+	@JsonProperty("hasRequest")
+	private boolean hasRequest;
 
 	public int getId() {
 		return id;
@@ -54,11 +57,19 @@ public class AssetModel {
 		this.deviceLocation = deviceLocation;
 	}
 
+	public String getDeviceDescription() {
+		return deviceDescription;
+	}
+
+	public void setDeviceDescription(String deviceDescription) {
+		this.deviceDescription = deviceDescription;
+	}
+
 	public Integer getCheckoutUserId() {
 		return checkoutUserId;
 	}
 
-	public void setCheckoutUserId(int checkoutUserId) {
+	public void setCheckoutUserId(Integer checkoutUserId) {
 		this.checkoutUserId = checkoutUserId;
 	}
 
@@ -70,11 +81,13 @@ public class AssetModel {
 		this.isCheckedOut = isCheckedOut;
 	}
 
-	public String getDeviceDescription() {
-		return deviceDescription;
+	public boolean isHasRequest() {
+		return hasRequest;
 	}
 
-	public void setDeviceDescription(String deviceDescription) {
-		this.deviceDescription = deviceDescription;
+	public void setHasRequest(boolean hasRequest) {
+		this.hasRequest = hasRequest;
 	}
+
+	
 }

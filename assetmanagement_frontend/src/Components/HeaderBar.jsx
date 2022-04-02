@@ -28,9 +28,21 @@ export default function HeaderBar() {
         navigate("../viewAllAssets");
     }
 
-    function naviagteBulletins(e){
+    function naviagteBulletins(e) {
         e.preventDefault();
         navigate("../viewAllBulletins");
+    }
+
+    function navigateITHelp(e) {
+        e.preventDefault();
+        navigate("../scheduleAppointment")
+    }
+
+    var isAdmin = null;
+    if (user) {
+        isAdmin = (user.admin === true)
+    } else {
+        isAdmin = "";
     }
 
     return (
@@ -46,14 +58,25 @@ export default function HeaderBar() {
                     </Link>
 
                     {/* Assets Link */}
-                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" ,cursor:'pointer'}} onClick={navigateAsset}>
+                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }} onClick={navigateAsset}>
                         Assets
                     </a>
 
                     {/* Bulletin Link */}
-                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" ,cursor:'pointer'}} onClick={naviagteBulletins}>                       
+                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }} onClick={naviagteBulletins}>
                         Bulletins
                     </a>
+
+                    {/* IT Help Link */}
+                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }} onClick={navigateITHelp}>
+                        Schedule IT Help
+                    </a>
+
+                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }}>
+                    {user ? `${user.admin ? "ADMIN USER" : "USER"}`  : "No account signed in"}
+                    </a>
+
+
 
                     <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" }}>
                     </a>
@@ -64,11 +87,11 @@ export default function HeaderBar() {
                 <div class="form-inline" >
 
                     {/* <Link to="../login">  */}
-                        <div style={{ paddingRight: '1em' }}>
-                            <button onClick={handlePersonCircle}>
-                                <PersonCircle size={30} color="#c44dff" />
-                            </button>
-                        </div>
+                    <div style={{ paddingRight: '1em' }}>
+                        <button onClick={handlePersonCircle}>
+                            <PersonCircle size={30} color="#c44dff" />
+                        </button>
+                    </div>
                 </div>
             </nav>
 

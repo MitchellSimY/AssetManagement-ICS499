@@ -1,5 +1,6 @@
 package Group1.AssetManagement.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +24,24 @@ public class AssetServiceImplementation implements AssetService {
 	public List<AssetModel> getAllAssets() {
 		return assetRepo.findAll();
 	}
-
+	
 	@Override
-	public AssetModel getAsset(Integer id) {
+	public List<AssetModel> getAllAvailableAssets() {
+		List<AssetModel> allAssets = getAllAssets();
+		List<AssetModel> availableAssets = new ArrayList<>();
 		
-		List<AssetModel> listOfAssets = assetRepo.findAll();
-		
-		for (AssetModel asset : listOfAssets) {
-			if (asset.getId() == id) {
-				return asset;
+		for (AssetModel asset : allAssets) {
+			if (!asset.isHasRequest()) {
+				availableAssets.add(asset);
 			}
 		}
-		return null;
+		
+		return availableAssets;
+	}
+	
+	@Override
+	public AssetModel getAsset(Integer id) {
+		return assetRepo.getById(id);
 	}
 
 }

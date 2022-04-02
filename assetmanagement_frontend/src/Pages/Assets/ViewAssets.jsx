@@ -1,26 +1,36 @@
 import * as React from "react";
-import { useContext, useState, useEffect } from "react";
-import { Box, Headphones, Laptop, PersonWorkspace, Printer, Speaker, TabletLandscape, UsbDrive, Cast, InfoLg, InfoCircle } from "react-bootstrap-icons";
-import { UserContext } from "../../Components/UserContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { Box, Headphones, Laptop, PersonWorkspace, Printer, Speaker, TabletLandscape, UsbDrive, Cast, InfoCircle } from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid';
+import RequestPopup from "../AssetRequest/RequestPopup";
+import { Button } from "react-bootstrap";
+import { UserContext } from "../../Components/UserContext";
 
 
-export default function AddAsset() {
+export default function ViewAssets() {
   // States
   const [allAssets, setAllAssets] = useState();
   const [assetTypeFilter, setAssetTypeFilter] = useState('');
   const [deviceNameSearch, setDeviceNameSearch] = useState('');
+  const [showDetails, setShowDetails] = useState(false);
+  const [requestedAsset, setRequestedAsset] = useState();
+
+  const { user, setUser } = useContext(UserContext)
+
+  // Modal configuration
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
 
   // Constants
   let navigate = useNavigate();
 
   // On page load
   useEffect(() => {
-    fetch(`http://localhost:8080/asset/getAllAssets`)
+    fetch(`http://localhost:8080/asset/getAllAvailableAssets`)
       .then((res) => res.json())
       .then((result) => {
-        setAllAssets(result);
+        setAllAssets(result.reverse());
       });
   });
 
@@ -44,7 +54,7 @@ export default function AddAsset() {
     paddingTop: "20rem",
     width: "60rem",
     margin: "auto",
-  };
+  }
 
   function handleAddAsset(e) {
     e.preventDefault();
@@ -53,7 +63,7 @@ export default function AddAsset() {
 
   function filterChosen(e) {
     var chosenAssetType = e.target.getAttribute("keyid")
-    if (chosenAssetType == "Show all options") {
+    if (chosenAssetType === "Show all options") {
       setAssetTypeFilter('')
     } else {
       setAssetTypeFilter(chosenAssetType)
@@ -83,19 +93,27 @@ export default function AddAsset() {
     return asset;
   }
 
-  function handleAssetClick(e) {
-    var chosenAssetId = e.target.getAttribute("keyid")
-    console.log(chosenAssetId)
-    navigate(`../assetDetails?id=${chosenAssetId}`)
+  function handleAssetInfoClick(asset) {
+    setRequestedAsset(asset);
+    setShowDetails(true);
+    setShow(true);
+  }
+
+  function handleRequest(asset) {
+    setRequestedAsset(asset);
+    setShowDetails(false);
+    setShow(true);
   }
 
   return (
     <div>
+      {show ? <RequestPopup show={show} handleClose={handleClose} asset={requestedAsset} showDetails={showDetails} /> : ""}
       <br />
       <div style={{ float: "right", paddingRight: "25em" }}>
-        <button type="button" class="btn btn-success" onClick={handleAddAsset}>Add Assets</button>
+        
+        {user?.isAdmin ? <button type="button" class="btn btn-success" onClick={handleAddAsset}>Add Assets</button> : null}
+        
       </div>
-
 
       <Grid container spacing={2}>
         <Grid item xs={1}>
@@ -143,31 +161,52 @@ export default function AddAsset() {
               </tr>
             </thead>
             <tbody>
+
+
               {
                 allAssets ? allAssets.map(asset => {
                   if (!(asset.deviceName.toUpperCase().includes(deviceNameSearch.toUpperCase()))) {
                     return null;
                   }
 
-                  if (assetTypeFilter != '') {
-                    if (asset.deviceCategory != assetTypeFilter) {
+                  if (assetTypeFilter !== '') {
+                    if (asset.deviceCategory !== assetTypeFilter) {
                       return null;
                     }
                   }
 
                   return (
+
                     <tr keyid={asset.id}>
+
                       <th keyid={asset.id} scope="row">{iconSelection(asset.deviceCategory)}</th>
+                      
                       <td>{asset.deviceName}</td>
+                      
                       <td>{asset.deviceCategory}</td>
-                      <td><button type="button" class="btn btn-primary">Request</button> 
-   
-                        <InfoCircle size={25} onClick={handleAssetClick} keyid={asset.id}/>
+                      
+                      <td>
+
+                        <Button
+                          variant="primary"
+                          object={asset}
+                          id={asset.id}
+                          onClick={() => {
+                            handleRequest(asset);
+                          }}>
+                          Request
+                        </Button>
+
+                        {" "}
+                        <InfoCircle size={30}
+                          onClick={() => {
+                            handleAssetInfoClick(asset)
+                          }}
+                          keyid={asset.id} />
 
                       </td>
                     </tr>
                   )
-
                 })
                   : ""}
             </tbody>

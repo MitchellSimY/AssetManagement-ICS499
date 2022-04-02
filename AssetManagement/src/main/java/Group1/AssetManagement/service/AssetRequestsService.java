@@ -6,7 +6,7 @@ import Group1.AssetManagement.model.AssetRequestsModel;
 
 public interface AssetRequestsService {
 	
-	public AssetRequestsModel saveAssetRequest(AssetRequestsModel asset);
+	public boolean saveAssetRequest(AssetRequestsModel asset);
 	
 	public List<AssetRequestsModel> getAllRequests();
 	
@@ -15,5 +15,7 @@ public interface AssetRequestsService {
 	public AssetRequestsModel getAsset(Integer id);
 	
 	public String deleteRequest(Integer id);
+
+	List<AssetRequestsModel> getUsersRequests(Integer userId);
 
 }

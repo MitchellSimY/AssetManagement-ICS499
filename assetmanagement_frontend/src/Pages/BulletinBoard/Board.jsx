@@ -15,14 +15,16 @@ export default function Board() {
   const [addBulletinPop, setAddBulletinPopup] = useState(false);
   const [allBulletins, setAllBulletins] = useState();
 
-    // On page load
-    useEffect(() => {
-      fetch(`http://localhost:8080/bulletin/getAllBulletins`)
-        .then((res) => res.json())
-        .then((result) => {
-          setAllBulletins(result.reverse());
-        });
-    });
+  const { user, setUser } = useContext(UserContext)
+
+  // On page load
+  useEffect(() => {
+    fetch(`http://localhost:8080/bulletin/getAllBulletins`)
+      .then((res) => res.json())
+      .then((result) => {
+        setAllBulletins(result.reverse());
+      });
+  });
 
   function createBulletin(e) {
     e.preventDefault();
@@ -30,24 +32,27 @@ export default function Board() {
   }
 
   return (
-    <div style={{paddingLeft: '10rem', paddingRight: '10rem'}}>
-      <br/>
-      <button onClick={createBulletin} class="btn btn-success">Create Bulletin</button>
-      { addBulletinPop ? <AddBulletin /> : "" }
-      <br/>
-      <br/>
+    <div style={{ paddingLeft: '20rem', paddingRight: '20rem' }}>
+      <br />
+
+      {user?.isAdmin ? <button onClick={createBulletin} class="btn btn-success">Create Bulletin</button> : null}
+
+      {addBulletinPop ? <AddBulletin /> : ""}
+      <br />
+      <br />
       <Grid container spacing={2}>
 
-          {allBulletins ? 
-            allBulletins.map((bulletin, index) => (
-              <Grid item xs={4}>
-                <BulletinCard title={bulletin.title} 
-                announcementType={bulletin.announcementType} 
+        {allBulletins ?
+          allBulletins.map((bulletin, index) => (
+            <Grid item xs={3}>
+              <BulletinCard title={bulletin.title}
+                announcementType={bulletin.announcementType}
                 bulletinText={bulletin.message}
-                bulletinId={bulletin.id}/>
-              </Grid>
-            )) : ""
-          } 
+                bulletinId={bulletin.id}
+                enableDelete={true} />
+            </Grid>
+          )) : ""
+        }
 
       </Grid>
     </div>

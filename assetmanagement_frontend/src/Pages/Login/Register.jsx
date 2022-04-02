@@ -35,7 +35,7 @@ export default function Register() {
     function handleRegister(e) {
         const user = { firstName, lastName, email, password, phone, userName, isAdmin };
 
-        if (adminKey != "iAdmin" && isAdmin) {
+        if (adminKey !== "iAdmin" && isAdmin) {
             setWarningError(false);
             setError("The Admin key you entered is incorrect")
             return
@@ -60,7 +60,7 @@ export default function Register() {
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
-                        navigate("../home")
+                        navigate("../")
                     } else {
                         setSuccessfulAdd(false);
                     }
@@ -169,7 +169,7 @@ export default function Register() {
 
 
                 <br />
-                <button type="submit" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "}
+                <button type="button" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "}
             </form>
         </div>
     );

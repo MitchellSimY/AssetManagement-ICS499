@@ -34,6 +34,11 @@ public class AssetController {
 		return assetService.getAllAssets();
 	}
 	
+	@GetMapping("/getAllAvailableAssets")
+	public List<AssetModel> getAllAvailableAssets() {
+		return assetService.getAllAvailableAssets();
+	}
+	
 	@GetMapping("/getAsset/{id}")
 	public AssetModel getAsset(@PathVariable Integer id) {
 		
