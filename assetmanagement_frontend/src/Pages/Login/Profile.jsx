@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../Components/UserContext";
 
 export default function Profile() {
@@ -15,7 +15,7 @@ export default function Profile() {
     return (
         <div>
             <div style={{ paddingLeft: '1rem' }}>
-                {/* <h2>Welcome, {user.firstName}!</h2> */}
+                <h2>Welcome, {user?.firstName}!</h2>
             </div>
 
 

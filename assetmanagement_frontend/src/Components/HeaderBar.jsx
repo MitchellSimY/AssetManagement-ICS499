@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function HeaderBar() {
     let navigate = useNavigate();
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     // Styles
     const menuButtonStyles = {
@@ -38,63 +38,58 @@ export default function HeaderBar() {
         navigate("../scheduleAppointment")
     }
 
-    var isAdmin = null;
-    if (user) {
-        isAdmin = (user.admin === true)
-    } else {
-        isAdmin = "";
-    }
-
     return (
+
         <div>
-            <nav class="navbar navbar-dark bg-dark justify-content-between" color="black" style={menuButtonStyles}>
+            {user?.userName ?
+                <nav class="navbar navbar-dark bg-dark justify-content-between" color="black" style={menuButtonStyles}>
 
-                {/* Left side of the nav bar */}
-                <div style={{ paddingLeft: '1em' }}>
-                    <Link to="../home">
-                        <button type="button" class="btn btn-outline-light">
-                            <HouseDoorFill color="white" size={25} style={menuButtonStyles} />
-                        </button>
-                    </Link>
+                    {/* Left side of the nav bar */}
+                    <div style={{ paddingLeft: '1em' }}>
+                        <Link to="../home">
+                            <button type="button" class="btn btn-outline-light">
+                                <HouseDoorFill color="white" size={25} style={menuButtonStyles} />
+                            </button>
+                        </Link>
 
-                    {/* Assets Link */}
-                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }} onClick={navigateAsset}>
-                        Assets
-                    </a>
+                        {/* Assets Link */}
+                        <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }} onClick={navigateAsset}>
+                            Assets
+                        </a>
 
-                    {/* Bulletin Link */}
-                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }} onClick={naviagteBulletins}>
-                        Bulletins
-                    </a>
+                        {/* Bulletin Link */}
+                        <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }} onClick={naviagteBulletins}>
+                            Bulletins
+                        </a>
 
-                    {/* IT Help Link */}
-                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }} onClick={navigateITHelp}>
-                        Schedule IT Help
-                    </a>
+                        {/* IT Help Link */}
+                        <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }} onClick={navigateITHelp}>
+                            Schedule IT Help
+                        </a>
 
-                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }}>
-                    {user ? `${user.admin ? "ADMIN USER" : "USER"}`  : "No account signed in"}
-                    </a>
+                        <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }}>
+                            {user ? `${user.admin ? "ADMIN USER" : "USER"}` : "No account signed in"}
+                        </a>
 
 
 
-                    <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" }}>
-                    </a>
+                        <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" }}>
+                        </a>
 
-                </div>
-
-                {/* Right side of the nav bar */}
-                <div class="form-inline" >
-
-                    {/* <Link to="../login">  */}
-                    <div style={{ paddingRight: '1em' }}>
-                        <button onClick={handlePersonCircle}>
-                            <PersonCircle size={30} color="#c44dff" />
-                        </button>
                     </div>
-                </div>
-            </nav>
 
+                    {/* Right side of the nav bar */}
+                    <div class="form-inline" >
+
+                        {/* <Link to="../login">  */}
+                        <div style={{ paddingRight: '1em' }}>
+                            <button onClick={handlePersonCircle}>
+                                <PersonCircle size={30} color="#c44dff" />
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+            : null}
         </div>
     );
 }
