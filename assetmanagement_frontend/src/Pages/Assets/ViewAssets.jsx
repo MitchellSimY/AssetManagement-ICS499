@@ -16,7 +16,7 @@ export default function ViewAssets() {
   const [showDetails, setShowDetails] = useState(false);
   const [requestedAsset, setRequestedAsset] = useState();
 
-  const { user, setUser } = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   // Modal configuration
   const [show, setShow] = useState(false);
@@ -110,7 +110,7 @@ export default function ViewAssets() {
       {show ? <RequestPopup show={show} handleClose={handleClose} asset={requestedAsset} showDetails={showDetails} /> : ""}
       <br />
       <div style={{ float: "right", paddingRight: "25em" }}>
-        
+
         {user?.isAdmin ? <button type="button" class="btn btn-success" onClick={handleAddAsset}>Add Assets</button> : null}
         
       </div>
@@ -145,7 +145,7 @@ export default function ViewAssets() {
             </div>
 
 
-            {assetTypesArray.map((assetOption, index) => (
+            {assetTypesArray.map((assetOption) => (
               <tr><h4 onClick={filterChosen} style={{ cursor: 'pointer' }} keyid={assetOption}>{assetOption}</h4></tr>
             ))}
 

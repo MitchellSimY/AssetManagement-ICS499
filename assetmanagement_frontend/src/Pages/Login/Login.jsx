@@ -2,7 +2,7 @@ import * as React from "react";
 import { useContext, useState } from "react";
 import ReactRecaptcha from "react-recaptcha";
 import { UserContext } from "../../Components/UserContext";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
     let navigate = useNavigate();
@@ -18,6 +18,7 @@ export default function Login() {
     // States
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    const [captchaVerified, setCaptchaVerified] = useState(false);
 
     function handleSignIn(e) {
         e.preventDefault();
@@ -33,6 +34,10 @@ export default function Login() {
     function handleForgotPassword(e) {
         e.preventDefault();
 
+    }
+
+    function verifyCaptcha() {
+        setCaptchaVerified(true);
     }
 
     /**
@@ -61,11 +66,16 @@ export default function Login() {
 
                 <div style={{ paddingLeft: '5rem' }}>
                     <ReactRecaptcha
-                        sitekey="6Ld1pH4eAAAAAFIC4kFwj442OYAwlqjlw4f4kMZC" required
+                        sitekey="6Ld1pH4eAAAAAFIC4kFwj442OYAwlqjlw4f4kMZC"
+                        verifyCallback={verifyCaptcha}
+                        required
                     />
                 </div>
 
-                    <button type="submit" class="btn btn-primary">Sign In</button>{" "}
+                {/* Bypassing Captcha */}
+                {/* <button disabled={!captchaVerified} type="submit" class="btn btn-primary">Sign In</button>{" "} */}
+
+                <button disabled={!captchaVerified} type="submit" class="btn btn-primary">Sign In</button>{" "}
 
                 <button type="button" class="btn btn-secondary" onClick={handleForgotPassword}>Forgot Password</button>
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import Grid from '@mui/material/Grid';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import BulletinCards from "../BulletinBoard/BulletinCards";
 
 export default function HomeViewBulletins() {

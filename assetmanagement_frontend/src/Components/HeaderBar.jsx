@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function HeaderBar() {
     let navigate = useNavigate();
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     // Styles
     const menuButtonStyles = {
@@ -36,13 +36,6 @@ export default function HeaderBar() {
     function navigateITHelp(e) {
         e.preventDefault();
         navigate("../scheduleAppointment")
-    }
-
-    var isAdmin = null;
-    if (user) {
-        isAdmin = (user.admin === true)
-    } else {
-        isAdmin = "";
     }
 
     return (

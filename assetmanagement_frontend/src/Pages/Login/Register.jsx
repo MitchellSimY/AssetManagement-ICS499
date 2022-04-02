@@ -23,6 +23,7 @@ export default function Register() {
     const [phone, setPhone] = useState("");
     const [userName, setUserName] = useState("");
     const [adminKey, setAdminKey] = useState("");
+    const [captchaVerified, setCaptchaVerified] = useState(false)
 
     // Error states
     const [successfulAdd, setSuccessfulAdd] = useState(true);
@@ -70,6 +71,10 @@ export default function Register() {
 
     function handleIsAdmin(e) {
         setIsAdmin(!isAdmin);
+    }
+
+    function verifyCaptcha(e) {
+        setCaptchaVerified(true);
     }
 
 
@@ -164,11 +169,15 @@ export default function Register() {
 
                 <div style={{ paddingLeft: '5rem' }} required>
                     <ReactRecaptcha
-                        sitekey="6Ld1pH4eAAAAAFIC4kFwj442OYAwlqjlw4f4kMZC" required />
+                        sitekey="6Ld1pH4eAAAAAFIC4kFwj442OYAwlqjlw4f4kMZC" 
+                        verifyCallback={verifyCaptcha} />
                 </div>
 
 
                 <br />
+                {/* Bypassing Captcha */}
+                {/* <button disabled={!captchaVerified} type="button" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "} */}
+
                 <button type="button" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "}
             </form>
         </div>

@@ -41,11 +41,11 @@ function App() {
           <Routes>
             {/* Public routes */}
             <Route path="/" element={<Login />} exact />
-
+            <Route path="/register" element={<Register />} />
+            
             {user?.userName ?
               <>
                 <Route path="/home" element={<Home />} />
-                <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profle />} />
                 <Route path="/viewAllAssets" element={<ViewAssets />} />
                 <Route path="/assetDetails" element={<AssetDetailsPage />} />

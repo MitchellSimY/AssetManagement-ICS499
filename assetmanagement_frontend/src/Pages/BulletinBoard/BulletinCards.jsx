@@ -5,7 +5,7 @@ import { UserContext } from "../../Components/UserContext";
 
 export default function BulletinCards({title, announcementType, bulletinText, bulletinId, enableDelete}) {
 
-    const { user, setUser } = useContext(UserContext)
+    const { user } = useContext(UserContext)
 
     function deleteBulletin() {
         fetch(`http://localhost:8080/bulletin/delete/${bulletinId}`, {
