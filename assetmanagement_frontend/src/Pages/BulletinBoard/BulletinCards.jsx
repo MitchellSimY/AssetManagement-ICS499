@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Card } from "react-bootstrap"
 
-export default function BulletinCards({title, announcementType, bulletinText, bulletinId}) {
+export default function BulletinCards({title, announcementType, bulletinText, bulletinId, enableDelete}) {
 
     function deleteBulletin() {
         fetch(`http://localhost:8080/bulletin/delete/${bulletinId}`, {
@@ -19,7 +19,8 @@ export default function BulletinCards({title, announcementType, bulletinText, bu
                 <Card.Text>
                     {bulletinText}
                     <br />
-                    <button class="btn btn-danger" onClick={deleteBulletin}>Delete</button>
+                    {enableDelete ? <button class="btn btn-danger" onClick={deleteBulletin}>Delete</button>: ""}
+                    
                 </Card.Text>
             </Card.Body>
         </Card>

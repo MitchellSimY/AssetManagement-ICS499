@@ -44,7 +44,8 @@ export default function Board() {
                 <BulletinCard title={bulletin.title} 
                 announcementType={bulletin.announcementType} 
                 bulletinText={bulletin.message}
-                bulletinId={bulletin.id}/>
+                bulletinId={bulletin.id}
+                enableDelete={true}/>
               </Grid>
             )) : ""
           } 

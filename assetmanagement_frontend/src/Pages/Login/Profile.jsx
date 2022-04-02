@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { UserContext } from "../Components/UserContext";
+import { UserContext } from "../../Components/UserContext";
 
 export default function Profile() {
     let navigate = useNavigate();

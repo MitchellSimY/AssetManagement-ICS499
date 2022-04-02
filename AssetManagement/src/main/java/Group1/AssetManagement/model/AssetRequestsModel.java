@@ -14,6 +14,8 @@ public class AssetRequestsModel {
 	private int id;
 	
 	private Integer requestorId, deviceId;
+	
+	private String deviceName;
 
 	@JsonProperty("isApproved")
 	private boolean isApproved;
@@ -49,4 +51,14 @@ public class AssetRequestsModel {
 	public void setApproved(boolean isApproved) {
 		this.isApproved = isApproved;
 	}
+	
+
+	public String getDeviceName() {
+		return deviceName;
+	}
+
+	public void setDeviceName(String deviceName) {
+		this.deviceName = deviceName;
+	}
+
 }

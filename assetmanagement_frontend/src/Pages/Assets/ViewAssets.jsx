@@ -7,13 +7,12 @@ import RequestPopup from "../AssetRequest/RequestPopup";
 import { Button } from "react-bootstrap";
 
 
-export default function AddAsset() {
+export default function ViewAssets() {
   // States
   const [allAssets, setAllAssets] = useState();
   const [assetTypeFilter, setAssetTypeFilter] = useState('');
   const [deviceNameSearch, setDeviceNameSearch] = useState('');
   const [showDetails, setShowDetails] = useState(false);
-
   const [requestedAsset, setRequestedAsset] = useState();
 
   // Modal configuration
@@ -25,7 +24,7 @@ export default function AddAsset() {
 
   // On page load
   useEffect(() => {
-    fetch(`http://localhost:8080/asset/getAllAssets`)
+    fetch(`http://localhost:8080/asset/getAllAvailableAssets`)
       .then((res) => res.json())
       .then((result) => {
         setAllAssets(result.reverse());
@@ -52,7 +51,7 @@ export default function AddAsset() {
     paddingTop: "20rem",
     width: "60rem",
     margin: "auto",
-  };
+  }
 
   function handleAddAsset(e) {
     e.preventDefault();
@@ -61,7 +60,7 @@ export default function AddAsset() {
 
   function filterChosen(e) {
     var chosenAssetType = e.target.getAttribute("keyid")
-    if (chosenAssetType == "Show all options") {
+    if (chosenAssetType === "Show all options") {
       setAssetTypeFilter('')
     } else {
       setAssetTypeFilter(chosenAssetType)
@@ -165,8 +164,8 @@ export default function AddAsset() {
                     return null;
                   }
 
-                  if (assetTypeFilter != '') {
-                    if (asset.deviceCategory != assetTypeFilter) {
+                  if (assetTypeFilter !== '') {
+                    if (asset.deviceCategory !== assetTypeFilter) {
                       return null;
                     }
                   }
@@ -174,9 +173,13 @@ export default function AddAsset() {
                   return (
 
                     <tr keyid={asset.id}>
+
                       <th keyid={asset.id} scope="row">{iconSelection(asset.deviceCategory)}</th>
+                      
                       <td>{asset.deviceName}</td>
+                      
                       <td>{asset.deviceCategory}</td>
+                      
                       <td>
 
                         <Button
