@@ -1,10 +1,11 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Box, Headphones, Laptop, PersonWorkspace, Printer, Speaker, TabletLandscape, UsbDrive, Cast, InfoCircle } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 import RequestPopup from "../AssetRequest/RequestPopup";
 import { Button } from "react-bootstrap";
+import { UserContext } from "../../Components/UserContext";
 
 
 export default function ViewAssets() {
@@ -14,6 +15,8 @@ export default function ViewAssets() {
   const [deviceNameSearch, setDeviceNameSearch] = useState('');
   const [showDetails, setShowDetails] = useState(false);
   const [requestedAsset, setRequestedAsset] = useState();
+
+  const { user, setUser } = useContext(UserContext)
 
   // Modal configuration
   const [show, setShow] = useState(false);
@@ -107,7 +110,9 @@ export default function ViewAssets() {
       {show ? <RequestPopup show={show} handleClose={handleClose} asset={requestedAsset} showDetails={showDetails} /> : ""}
       <br />
       <div style={{ float: "right", paddingRight: "25em" }}>
-        <button type="button" class="btn btn-success" onClick={handleAddAsset}>Add Assets</button>
+        
+        {user?.isAdmin ? <button type="button" class="btn btn-success" onClick={handleAddAsset}>Add Assets</button> : null}
+        
       </div>
 
       <Grid container spacing={2}>

@@ -35,10 +35,9 @@ function App() {
       <div>
         <div className="App">
 
-          <HeaderBar />
+          {user !== null ? <HeaderBar />: null}
           <Routes>
             {/* Public routes */}
-
             <Route path="/" element={<Login />} exact />
             <Route path="/home" element={<Home />} />
             <Route path="/register" element={<Register />} />
@@ -53,6 +52,7 @@ function App() {
             {user?.isAdmin ?
               <Route path="/addAsset" element={<AddAsset />} /> : null}
 
+            {/* Error Routes */}
             <Route path='*' exact={true} element={<_404Page />} />
 
           </Routes>
