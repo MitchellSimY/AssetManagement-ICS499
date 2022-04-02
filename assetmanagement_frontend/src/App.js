@@ -35,27 +35,36 @@ function App() {
       <div>
         <div className="App">
 
-          {user !== null ? <HeaderBar />: null}
+          {user !== null ? <HeaderBar /> : null}
+
+
           <Routes>
             {/* Public routes */}
             <Route path="/" element={<Login />} exact />
-            <Route path="/home" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profle />} />
-            <Route path="/viewAllAssets" element={<ViewAssets />} />
-            <Route path="/assetDetails" element={<AssetDetailsPage />} />
-            <Route path="/viewAllBulletins" element={<BulletinsPage />} />
-            <Route path="/scheduleAppointment" element={<ScheduleAppointment />} />
-            <Route path="/viewAllRequests" element={<ViewAllRequests />} />
+
+            {user?.userName ?
+              <>
+                <Route path="/home" element={<Home />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/profile" element={<Profle />} />
+                <Route path="/viewAllAssets" element={<ViewAssets />} />
+                <Route path="/assetDetails" element={<AssetDetailsPage />} />
+                <Route path="/viewAllBulletins" element={<BulletinsPage />} />
+                <Route path="/scheduleAppointment" element={<ScheduleAppointment />} />
+                <Route path="/viewAllRequests" element={<ViewAllRequests />} />
+                {/* Error Routes */}
+                <Route path='*' element={<_404Page />} />
+              </>
+              : null}
 
             {/* Admin Routes */}
             {user?.isAdmin ?
               <Route path="/addAsset" element={<AddAsset />} /> : null}
 
-            {/* Error Routes */}
-            <Route path='*' exact={true} element={<_404Page />} />
+            <Route path='*' element={<_404Page />} />
 
           </Routes>
+
 
         </div>
       </div>
