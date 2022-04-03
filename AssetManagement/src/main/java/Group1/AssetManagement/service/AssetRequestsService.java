@@ -18,4 +18,6 @@ public interface AssetRequestsService {
 
 	List<AssetRequestsModel> getUsersRequests(Integer userId);
 
+	public boolean approveRequest(Integer reqId);
+
 }

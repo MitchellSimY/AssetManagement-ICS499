@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import RequestPopup from "../AssetRequest/RequestPopup";
 import { Button } from "react-bootstrap";
 import { UserContext } from "../../Components/UserContext";
+import AssetStyles from "../Assets/AssetsStyles.css"
 
 
 export default function ViewAssets() {
@@ -120,7 +121,7 @@ export default function ViewAssets() {
         </Grid>
 
         <Grid item xs={2}>
-          <table style={{ paddingLeft: "10rem" }}>
+          <table style={AssetStyles}>
             <thead>
               <tr>
                 <th scope="col"><h2>Filter Asset Options</h2></th>
@@ -133,7 +134,7 @@ export default function ViewAssets() {
                   Search
                 </span>
               </div>
-              <input
+              <input 
                 type="text"
                 class="form-control"
                 placeholder="Asset Name"
@@ -146,7 +147,7 @@ export default function ViewAssets() {
 
 
             {assetTypesArray.map((assetOption) => (
-              <tr><h4 onClick={filterChosen} style={{ cursor: 'pointer' }} keyid={assetOption}>{assetOption}</h4></tr>
+              <tr><h4 onClick={filterChosen} style={AssetStyles} keyid={assetOption}>{assetOption}</h4></tr>
             ))}
 
           </table>

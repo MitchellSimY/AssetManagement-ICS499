@@ -49,4 +49,11 @@ public class AssetRequestsController {
 		
 		return "Deleted request";
 	}
+	
+	@PostMapping("/approveRequest/{reqId}")
+	public boolean approveRequest(@PathVariable Integer reqId) {
+		return arService.approveRequest(reqId);
+	}
+	
+	// RELINQUISH ASSET
 }

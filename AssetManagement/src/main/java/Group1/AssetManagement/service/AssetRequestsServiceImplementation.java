@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import Group1.AssetManagement.model.AssetModel;
 import Group1.AssetManagement.model.AssetRequestsModel;
+import Group1.AssetManagement.model.UserModel;
 import Group1.AssetManagement.repository.AssetRepository;
 import Group1.AssetManagement.repository.AssetRequestsRepository;
+import Group1.AssetManagement.repository.UserRepository;
 
 @Service
 public class AssetRequestsServiceImplementation implements AssetRequestsService{
@@ -20,9 +22,13 @@ public class AssetRequestsServiceImplementation implements AssetRequestsService{
 	@Autowired
 	private AssetRepository asRepo;
 	
+	@Autowired
+	private UserRepository userRepo;
+	
 	@Override
 	public boolean saveAssetRequest(AssetRequestsModel assetReq) {
 		arRepo.save(assetReq);
+		
 		AssetModel asset = asRepo.getById(assetReq.getDeviceId());
 		
 		asset.setHasRequest(true);
@@ -81,6 +87,25 @@ public class AssetRequestsServiceImplementation implements AssetRequestsService{
 		asRepo.flush();
 		
 		return "Request Deleted";
+	}
+
+	@Override
+	public boolean approveRequest(Integer reqId) {
+		try {
+			AssetRequestsModel assetReq = arRepo.getById(reqId);
+			AssetModel asset = asRepo.getById(assetReq.getDeviceId());
+			UserModel user = userRepo.getById(assetReq.getRequestorId());
+			
+			asset.setCheckoutUserId(assetReq.getRequestorId());
+			asset.setHasRequest(false);
+			asset.setCheckedOut(true);
+			arRepo.deleteById(reqId);
+			arRepo.flush();
+			asRepo.flush();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }

@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { PersonCircle, HouseDoorFill } from 'react-bootstrap-icons';
 import { UserContext } from "./UserContext";
 import { Link, useNavigate } from "react-router-dom";
+import HeaderStyle from "../Components/HeaderBarStyles.css"
 
 export default function HeaderBar() {
     let navigate = useNavigate();
@@ -38,9 +39,14 @@ export default function HeaderBar() {
         navigate("../scheduleAppointment")
     }
 
+    function navUserRequests(e) {
+        e.preventDefault();
+        navigate("../pendingUserAssetRequests")
+    }
+
     return (
 
-        <div>
+        <div style={HeaderStyle}>
             {user?.userName ?
                 <nav class="navbar navbar-dark bg-dark justify-content-between" color="black" style={menuButtonStyles}>
 
@@ -67,6 +73,13 @@ export default function HeaderBar() {
                             Schedule IT Help
                         </a>
 
+                        {/* IT Help Link */}
+                        {user?.isAdmin ?
+                            <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }} onClick={navUserRequests}>
+                                Pending User Requests
+                            </a>
+                            : null}
+
                         <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }}>
                             {user ? `${user.admin ? "ADMIN USER" : "USER"}` : "No account signed in"}
                         </a>
@@ -89,7 +102,7 @@ export default function HeaderBar() {
                         </div>
                     </div>
                 </nav>
-            : null}
+                : null}
         </div>
     );
 }

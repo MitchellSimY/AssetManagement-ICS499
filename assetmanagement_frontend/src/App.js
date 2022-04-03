@@ -14,7 +14,8 @@ import AssetDetailsPage from "./Pages/Assets/AssetDetailsPage";
 import BulletinsPage from "./Pages/BulletinBoard/Board.jsx"
 import ScheduleAppointment from "./Pages/Appointments/ScheduleAppointments";
 import ViewAllRequests from "./Pages/AssetRequest/ViewAllRequests";
-import _404Page from "./Pages/404Page";
+import AllUserAsRequests from "./Pages/AssetRequest/AllUserAsRequests";
+import _404Page from "./Pages/Login/404Page";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -42,7 +43,7 @@ function App() {
             {/* Public routes */}
             <Route path="/" element={<Login />} exact />
             <Route path="/register" element={<Register />} />
-            
+
             {user?.userName ?
               <>
                 <Route path="/home" element={<Home />} />
@@ -59,7 +60,11 @@ function App() {
 
             {/* Admin Routes */}
             {user?.isAdmin ?
-              <Route path="/addAsset" element={<AddAsset />} /> : null}
+              <>
+                <Route path="/addAsset" element={<AddAsset />} />
+                <Route path="/pendingUserAssetRequests" element={<AllUserAsRequests/>}/>
+              </>
+              : null}
 
             <Route path='*' element={<_404Page />} />
 

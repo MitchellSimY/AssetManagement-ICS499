@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Grid from '@mui/material/Grid';
 import { Link } from "react-router-dom";
 import BulletinCards from "../BulletinBoard/BulletinCards";
+import HomeStyles from "./HomeStyles.css"
 
 export default function HomeViewBulletins() {
 
@@ -25,7 +26,7 @@ export default function HomeViewBulletins() {
                             return
                         }
                         return (
-                        <Grid item xs={3}>
+                        <Grid item xs={2}>
                             <BulletinCards
                                 title={bulletin.title}
                                 announcementType={bulletin.announcementType}
@@ -37,7 +38,7 @@ export default function HomeViewBulletins() {
                 }
 
             </Grid>
-            <Link to="../viewAllBulletins">
+            <Link to="../viewAllBulletins" >
                 View all bulletin posts
             </Link>
         </div>
