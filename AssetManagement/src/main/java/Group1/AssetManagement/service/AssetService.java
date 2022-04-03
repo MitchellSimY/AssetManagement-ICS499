@@ -12,4 +12,6 @@ public interface AssetService {
 	public List<AssetModel> getAllAvailableAssets();
 	
 	public AssetModel getAsset(Integer id);
+
+	public List<AssetModel> getUsersAssets(Integer id);
 }

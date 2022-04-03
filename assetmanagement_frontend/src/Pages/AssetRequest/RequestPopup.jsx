@@ -18,8 +18,9 @@ export default function RequestPopup({ show, handleClose, asset, showDetails }) 
         var deviceId = requestedAsset.id
         var requestorId = user.id
         var deviceName = asset.deviceName
+        var requestorName = user.firstName + " " + user.lastName;
 
-        const request = {deviceId, requestorId, deviceName}
+        const request = {deviceId, requestorId, deviceName, requestorName}
 
         fetch("http://localhost:8080/assetRequest/add", {
             method: "POST",

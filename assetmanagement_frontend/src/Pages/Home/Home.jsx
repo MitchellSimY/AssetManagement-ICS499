@@ -4,6 +4,7 @@ import { UserContext } from "../../Components/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import HomeViewReqs from "./HomeViewReqs.jsx";
 import HomeViewBulletins from "./HomeViewBulletins.jsx";
+import HomeStyles from "./HomeStyles.css"
 
 
 export default function Home() {
@@ -65,7 +66,7 @@ export default function Home() {
 
 
             <br />
-            <h2>Pending Asset Requests</h2>
+            <h2 style={HomeStyles}>Pending Asset Requests</h2>
             <HomeViewReqs requests={allRequests} />
             <br />
 

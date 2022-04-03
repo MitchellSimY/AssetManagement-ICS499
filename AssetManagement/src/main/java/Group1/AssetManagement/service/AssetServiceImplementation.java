@@ -31,7 +31,8 @@ public class AssetServiceImplementation implements AssetService {
 		List<AssetModel> availableAssets = new ArrayList<>();
 		
 		for (AssetModel asset : allAssets) {
-			if (!asset.isHasRequest()) {
+			
+			if (!asset.isHasRequest() || !asset.isCheckedOut()) {
 				availableAssets.add(asset);
 			}
 		}
@@ -42,6 +43,23 @@ public class AssetServiceImplementation implements AssetService {
 	@Override
 	public AssetModel getAsset(Integer id) {
 		return assetRepo.getById(id);
+	}
+
+	@Override
+	public List<AssetModel> getUsersAssets(Integer id) {
+		List<AssetModel> allAssets = getAllAssets();
+		List<AssetModel> usersAssets = new ArrayList<AssetModel>();
+		
+		for (AssetModel asset : allAssets) {
+			if (asset.getCheckoutUserId() == null) {
+				
+			} else {
+				if (asset.getCheckoutUserId().equals(id)) {
+					usersAssets.add(asset);
+				}
+			}
+		}
+		return usersAssets;
 	}
 
 }

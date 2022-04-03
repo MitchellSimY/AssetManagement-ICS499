@@ -36,19 +36,19 @@ export default function AddAsset() {
   function addToDatabase(e) {
     e.preventDefault();
 
-    const asset = {deviceName, deviceCategory, deviceDescription, deviceLocation}
+    const asset = { deviceName, deviceCategory, deviceDescription, deviceLocation }
 
     console.table(asset);
 
     fetch("http://localhost:8080/asset/add", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify(asset),
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(asset),
     }).then(() => {
-        console.log("New asset added!");
+      console.log("New asset added!");
     });
 
-    
+
     nav("../viewAllAssets")
   }
 
@@ -117,8 +117,8 @@ export default function AddAsset() {
         </div>
         {/* End Of Device Description */}
 
-                {/* Device Location */}
-                <div class="input-group mb-3">
+        {/* Device Location */}
+        <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">
               Device Location

@@ -45,5 +45,11 @@ public class AssetController {
 		return assetService.getAsset(id);
 	}
 	
+	@GetMapping("/getUsersAssets/{id}")
+	public List<AssetModel> getUsersAssets(@PathVariable Integer id) {
+		
+		return assetService.getUsersAssets(id);
+	}
+	
 	
 }

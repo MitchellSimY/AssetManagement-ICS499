@@ -27,11 +27,20 @@ export default function ViewAllRequests() {
             .then((result) => {
                 setAllRequests(result.reverse());
             });
-    }, [user]);
+    });
 
     function deleteRequest(id, index) {
         setCancelId(id)
         setShow(true)
+    }
+
+    function approveRequest(id, index) {
+        fetch(`http://localhost:8080/assetRequest/approveRequest/${id}`, {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+        }).then(() => {
+            console.log("Request approved!");
+        });
     }
 
     return (
@@ -40,7 +49,7 @@ export default function ViewAllRequests() {
                 <Confirmation
                     show={show}
                     handleClose={handleClose}
-                    allRequests={allRequests} 
+                    allRequests={allRequests}
                     setAllRequests={setAllRequests}
                     id={cancelId}
                 /> : ""}
@@ -58,10 +67,21 @@ export default function ViewAllRequests() {
                         return (
                             <tr>
                                 <td>{req.deviceName}</td>
-                                <td><button
-                                    onClick={() => { deleteRequest(req.id, index) }}>
-                                    Delete Request
-                                </button></td>
+
+                                {user?.isAdmin ?
+                                    <td>
+                                        <button
+                                            onClick={() => { approveRequest(req.id, index) }}>
+                                            Delete Request
+                                        </button>
+                                    </td>
+                                    : null}
+                                <td>
+                                    <button
+                                        onClick={() => { deleteRequest(req.id, index) }}>
+                                        Delete Request
+                                    </button>
+                                </td>
                             </tr>
                         )
                     }) : ""}
