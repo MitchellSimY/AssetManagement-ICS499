@@ -170,6 +170,10 @@ export default function ViewAssets() {
                     return null;
                   }
 
+                  if (asset.checkoutUserId || asset.hasRequest) {
+                    return null
+                  }
+
                   if (assetTypeFilter !== '') {
                     if (asset.deviceCategory !== assetTypeFilter) {
                       return null;
