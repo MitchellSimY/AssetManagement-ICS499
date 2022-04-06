@@ -81,7 +81,7 @@ export default function HeaderBar() {
                             : null}
 
                         <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }}>
-                            {user ? `${user.admin ? "ADMIN USER" : "USER"}` : "No account signed in"}
+                            {user ? `${user.admin ? `ADMIN USER: ${user.firstName} ${user.lastName}` : `USER: ${user.firstName} ${user.lastName}`}` : "No account signed in"}
                         </a>
 
 
