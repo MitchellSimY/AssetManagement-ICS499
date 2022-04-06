@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from "react";
 
 export default function AssetDetailsPage({incomingId}) {
 
+    // Test
     const queryParams = new URLSearchParams(window.location.search);
     const id = queryParams.get("id");
     const [asset, setAsset] = useState();
