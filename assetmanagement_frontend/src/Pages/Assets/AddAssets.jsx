@@ -38,8 +38,6 @@ export default function AddAsset() {
 
     const asset = { deviceName, deviceCategory, deviceDescription, deviceLocation }
 
-    console.table(asset);
-
     fetch("http://localhost:8080/asset/add", {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -56,6 +54,7 @@ export default function AddAsset() {
     <div>
       <h1>This is the add asset page</h1>
       <form style={styles} required>
+
         <div class="input-group mb-3">
           {/* Asset Name */}
           <div class="input-group-prepend">
@@ -137,7 +136,7 @@ export default function AddAsset() {
         {/* End Of Device Location */}
 
 
-        <button onClick={addToDatabase}>Add Asset</button>
+        <button onSubmit={addToDatabase}>Add Asset</button>
       </form>
     </div>
   );

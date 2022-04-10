@@ -56,6 +56,7 @@ export default function AddBulletin() {
             class="form-control"
             value={announcementType}
             onChange={(e) => setType(e.target.value)}
+            required
           >
 
             {/* Drop down options */}
@@ -68,7 +69,7 @@ export default function AddBulletin() {
           </select>
         </div>
 
-            <button type="submit" onClick={onSubmit} class="btn btn-success">Submit</button>
+            <button type="submit" onSubmit={onSubmit} class="btn btn-success">Submit</button>
         </form>
     </div>
   );
