@@ -46,7 +46,6 @@ public class AssetRequestsController {
 	@DeleteMapping("/delete/{requestId}")
 	public String delete(@PathVariable Integer requestId) {
 		arService.deleteRequest(requestId);
-		
 		return "Deleted request";
 	}
 	
