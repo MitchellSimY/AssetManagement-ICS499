@@ -36,8 +36,13 @@ export default function AllUserAsRequests() {
         console.log("Approved")
     }
 
-    function handleDeny() {
-        console.table(allReqs)
+    function handleDeny(reqId) {
+        fetch(`http://localhost:8080/assetRequest/delete/${reqId}`, {
+            method: "DELETE",
+            headers: { "Content-type": "application/json" },
+        }).then(() => {
+            console.log("Asset Request Deleted");
+        });
     }
 
     return (
@@ -59,7 +64,8 @@ export default function AllUserAsRequests() {
                                 <td>{req.requestorName}</td>
                                 <td>{req.deviceName}</td>
                                 <td><button class="btn btn-primary" onClick={() => { handleApprove(req.id) }}>Approve</button> {" "}
-                                    <button class="btn btn-danger" onClick={handleDeny}>Deny</button></td>
+                                    <button class="btn btn-danger" onClick={() => {handleDeny(req.id)}}>Deny</button>
+                                    </td>
                             </tr>
                         )
                     }) : null}
