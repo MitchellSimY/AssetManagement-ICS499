@@ -63,9 +63,11 @@ export default function AllUserAsRequests() {
                             <tr>
                                 <td>{req.requestorName}</td>
                                 <td>{req.deviceName}</td>
-                                <td><button class="btn btn-primary" onClick={() => { handleApprove(req.id) }}>Approve</button> {" "}
-                                    <button class="btn btn-danger" onClick={() => {handleDeny(req.id)}}>Deny</button>
-                                    </td>
+                                <td>
+                                    <button class="btn btn-primary" onClick={() => { handleApprove(req.id) }}>Approve</button> {" "}
+
+                                    <button class="btn btn-danger" onClick={handleDeny}>Deny</button>
+                                </td>
                             </tr>
                         )
                     }) : null}
