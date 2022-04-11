@@ -72,16 +72,17 @@ export default function ViewAllRequests() {
                                     <td>
                                         <button
                                             onClick={() => { approveRequest(req.id, index) }}>
-                                            Delete Request
+                                            Approve Request
                                         </button>
                                     </td>
                                     : null}
-                                <td>
+
+                                    <td>
                                     <button
-                                        onClick={() => { deleteRequest(req.id, index) }}>
-                                        Delete Request
-                                    </button>
-                                </td>
+                                            onClick={() => { deleteRequest(req.id, index) }}>
+                                            Delete Request
+                                        </button>
+                                    </td>
                             </tr>
                         )
                     }) : ""}

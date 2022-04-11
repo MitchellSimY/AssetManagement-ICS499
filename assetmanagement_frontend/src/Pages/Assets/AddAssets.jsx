@@ -1,8 +1,6 @@
 import * as React from "react";
-import { useContext, useState } from "react";
-import { PersonCircle, HouseDoorFill } from "react-bootstrap-icons";
-import { UserContext } from "../../Components/UserContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AddAsset() {
   let nav = useNavigate()
@@ -54,7 +52,6 @@ export default function AddAsset() {
 
   return (
     <div>
-      <h1>This is the add asset page</h1>
       <form style={styles} required>
         <div class="input-group mb-3">
           {/* Asset Name */}

@@ -1,10 +1,9 @@
-import userEvent from "@testing-library/user-event";
 import * as React from "react";
 import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../Components/UserContext";
 
-export default function HomeViewReqs({ requests }) {
+export default function HomeViewAppts({ appointments }) {
     let navigate = useNavigate();
     const { user } = useContext(UserContext)
 
@@ -27,24 +26,19 @@ export default function HomeViewReqs({ requests }) {
             <table class="table table-hover" style={tableStyle}>
                 <thead>
                     <tr>
-                        <th scope="col">Asset Name</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Appointment Date</th>
+                        <th scope="col">Appointment Time</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {requests ? requests.map((reqs, index) => {
+                    {appointments ? appointments.map((appts, index) => {
                         if (index >= 3) {
                             return
                         }
                         return (
                             <tr>
-                                <td>{reqs.deviceName}</td>
-
-                                {user?.isAdmin ?
-                                    <td>
-                                        <button onClick={handleApproveReq}>Approve</button>
-                                    </td>
-                                    : null}
+                                <td>{appts.requestedDate}</td>
+                                <td>{appts.requestedTime}</td>
 
                                 <td>
                                     <button onClick={handleCancelRequest}>Cancel Request
@@ -57,8 +51,8 @@ export default function HomeViewReqs({ requests }) {
                         : ""}
                 </tbody>
             </table>
-            <Link to="/ViewAllRequests">
-                View all asset requests..
+            <Link to="/ViewAllAppointments">
+                View all appointments..
             </Link>
         </div >
     )

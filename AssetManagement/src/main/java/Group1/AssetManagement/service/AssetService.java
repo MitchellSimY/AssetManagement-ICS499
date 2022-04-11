@@ -14,4 +14,6 @@ public interface AssetService {
 	public AssetModel getAsset(Integer id);
 
 	public List<AssetModel> getUsersAssets(Integer id);
+	
+	public boolean deleteAsset(Integer id);
 }
