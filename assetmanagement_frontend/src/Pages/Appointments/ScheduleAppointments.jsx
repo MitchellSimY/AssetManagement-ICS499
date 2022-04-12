@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useState, useEffect, useContext } from "react";
 import Grid from '@mui/material/Grid';
-import cursorStyle from "./AppointmentStyles.css"
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../Components/UserContext";
 
@@ -195,8 +194,8 @@ export default function ScheduleAppointment() {
 
                                     <option value=""></option>
                                     {/* Drop down options */}
-                                    {times.map((times, index) => (
-                                        <option value={times}>{times}</option>
+                                    {times.map((time) => (
+                                        <option value={time}>{time}</option>
                                     ))}
                                 </select>
                             </div>

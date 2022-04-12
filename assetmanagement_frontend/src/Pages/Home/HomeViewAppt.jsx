@@ -1,11 +1,8 @@
 import * as React from "react";
-import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../../Components/UserContext";
 
-export default function HomeViewAppts({ appointments }) {
+export default function HomeViewAppt({ appointments }) {
     let navigate = useNavigate();
-    const { user } = useContext(UserContext)
 
     const tableStyle = {
         paddingLeft: "3rem",
@@ -13,12 +10,20 @@ export default function HomeViewAppts({ appointments }) {
         width: "40rem",
     }
 
-    function handleApproveReq() {
-        navigate("../ViewAllRequests")
+    function handleCancelRequest() {
+        navigate("../ViewAllAppointments")
     }
 
-    function handleCancelRequest() {
-        navigate("../ViewAllRequests")
+    function isApptInvalid(appts) {
+        var today = new Date()
+        const appointmentDate = Date.parse(appts.requestedDate)
+        console.log()
+        console.log(appointmentDate)
+
+        if (appointmentDate >= Date.parse(today)) {
+            return false
+        }
+        return true
     }
 
     return (
@@ -32,7 +37,12 @@ export default function HomeViewAppts({ appointments }) {
                 </thead>
                 <tbody>
                     {appointments ? appointments.map((appts, index) => {
-                        if (index >= 3) {
+                        if (isApptInvalid(appts)) {
+                            index--
+                            return
+                        }
+
+                        if (index < 3) {
                             return
                         }
                         return (
@@ -41,9 +51,9 @@ export default function HomeViewAppts({ appointments }) {
                                 <td>{appts.requestedTime}</td>
 
                                 <td>
-                                    <button onClick={handleCancelRequest}>Cancel Request
+                                    <button class="btn btn-warning"  onClick={handleCancelRequest}>Cancel Appointment
                                     </button>
-                                </td>
+                                </td> 
 
                             </tr>
                         )

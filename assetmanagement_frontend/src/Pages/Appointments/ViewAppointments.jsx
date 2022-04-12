@@ -1,11 +1,9 @@
 import * as React from "react";
 import { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../Components/UserContext";
 
 export default function ViewAppointments() {
 
-  const [allReqs, setAllReqs] = useState();
   const [allAppointments, setAllAppointments] = useState()
   const { user } = useContext(UserContext)
 
@@ -25,9 +23,25 @@ export default function ViewAppointments() {
       });
   })
 
-  function cancelAppointment() {
-
+  function cancelAppointment(id) {
+    fetch(`http://localhost:8080/appointment/delete/${id}`)
+      .then((res) => res.json())
+      .then((result) => {
+        setAllAppointments(result.reverse());
+      });
   }
+
+  function isApptInvalid(appts) {
+    var today = new Date()
+    const appointmentDate = Date.parse(appts.requestedDate)
+    console.log()
+    console.log(appointmentDate)
+
+    if (appointmentDate >= Date.parse(today)) {
+        return false
+    }
+    return true
+}
 
   return (
     <div>
@@ -43,12 +57,24 @@ export default function ViewAppointments() {
 
         <tbody>
           {allAppointments ? allAppointments.map((appts, index) => {
+            if (isApptInvalid(appts)) {
+              index--
+              return
+            }
+
+            if (index < 3) {
+              return
+            }
             return (
               <tr>
                 <td>{appts.requestedDate}</td>
                 <td>{appts.requestedTime}</td>
                 <td>
-                  <button class="btn btn-danger" onClick={cancelAppointment}>Cancel</button></td>
+                  <button class="btn btn-danger"
+                    onClick={() => { cancelAppointment(appts.id) }}>
+                    Cancel
+                  </button>
+                </td>
               </tr>
             )
           }) : null}
