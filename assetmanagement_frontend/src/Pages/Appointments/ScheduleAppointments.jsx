@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../Components/UserContext";
 
-export default function ScheduleAppointment() {
+export default function ScheduleAppointments() {
     let nav = useNavigate()
 
     const formStyle = {
