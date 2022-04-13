@@ -133,7 +133,7 @@ export default function AddAsset() {
         {/* End Of Device Location */}
 
 
-        <button onSubmit={addToDatabase}>Add Asset</button>
+        <button onClick={addToDatabase}>Add Asset</button>
       </form>
     </div>
   );
