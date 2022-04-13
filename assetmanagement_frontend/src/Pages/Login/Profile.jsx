@@ -88,7 +88,7 @@ export default function Profile() {
                         Asset Type
                     </th>
                 </tr>
-                <tbody >
+                <tbody > 
                     {allAssets ? allAssets.map(asset => {
 
                         return (
