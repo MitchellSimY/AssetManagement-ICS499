@@ -62,6 +62,12 @@ public class AssetServiceImplementation implements AssetService {
 		return usersAssets;
 	}
 
+	@Override
+	public boolean deleteAsset(Integer id) {
+		assetRepo.deleteById(id);
+		return true;
+	}
+
 }
 
 

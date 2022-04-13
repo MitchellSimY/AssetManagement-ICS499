@@ -1,12 +1,11 @@
-import userEvent from "@testing-library/user-event";
 import * as React from "react";
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../Components/UserContext";
 
 export default function HomeViewReqs({ requests }) {
     let navigate = useNavigate();
-    const { user, setUser } = useContext(UserContext)
+    const { user } = useContext(UserContext)
 
     const tableStyle = {
         paddingLeft: "3rem",
@@ -42,12 +41,12 @@ export default function HomeViewReqs({ requests }) {
 
                                 {user?.isAdmin ?
                                     <td>
-                                        <button onClick={handleApproveReq}>Approve</button>
+                                        <button class="btn btn-success"  onClick={handleApproveReq}>Approve</button>
                                     </td>
                                     : null}
 
                                 <td>
-                                    <button onClick={handleCancelRequest}>Cancel Request
+                                    <button class="btn btn-warning"  onClick={handleCancelRequest}>Cancel Request
                                     </button>
                                 </td>
 

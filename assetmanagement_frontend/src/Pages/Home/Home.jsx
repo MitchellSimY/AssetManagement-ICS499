@@ -4,6 +4,7 @@ import { UserContext } from "../../Components/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import HomeViewReqs from "./HomeViewReqs.jsx";
 import HomeViewBulletins from "./HomeViewBulletins.jsx";
+import HomeViewAppts from "./HomeViewAppt";
 import HomeStyles from "./HomeStyles.css"
 
 
@@ -14,45 +15,34 @@ export default function Home() {
 
     const { user, setUser } = useContext(UserContext)
     const [allRequests, setAllRequests] = useState()
+    const [allAppointments, setAllAppointments] = useState()
 
     // On page load
     // Getting all user requests
     useEffect(() => {
-        fetch(`http://localhost:8080/assetRequest/getUsersRequests/${user ? user.id : null}`)
-            .then((res) => res.json())
-            .then((result) => {
-                setAllRequests(result.reverse());
-            });
+        fetchEverything()
     }, [user]);
+
+    function fetchEverything() {
+        fetch(`http://localhost:8080/assetRequest/getUsersRequests/${user ? user.id : null}`)
+        .then((res) => res.json())
+        .then((result) => {
+            setAllRequests(result.reverse());
+        });
+
+        fetch(`http://localhost:8080/appointment/getUserAppointment/${user ? user.id : null}`)
+        .then((res) => res.json())
+        .then((result) => {
+            setAllAppointments(result.reverse());
+        });
+
+        
+    }
 
     function clearStorage(e) {
         e.preventDefault();
         setUser()
         navigate(`../`);
-    }
-
-
-
-    function getDate(e) {
-        e.preventDefault();
-        let d = new Date()
-        let date = d.getDate();
-        let month = d.getMonth() + 1;
-        let year = d.getFullYear();
-        let day = d.getDay();
-        let utcms = d.getUTCMilliseconds();
-        let ms = d.getMilliseconds();
-
-        // console.log(`varDate ${varDate}`)
-
-        console.log(`UTCMS ${utcms}`)
-        console.log(`ms ${ms}`)
-        console.log("new date = " + d)
-
-        let theDate = month + "/" + date + "/" + year;
-        console.log("day = " + day);
-        console.log(theDate);
-
     }
 
     return (
@@ -71,6 +61,8 @@ export default function Home() {
             <br />
 
             <h2>Pending IT Help</h2>
+            <HomeViewAppts appointments={allAppointments}/>
+
 
             <br />
             <br />
@@ -88,8 +80,6 @@ export default function Home() {
             <Link to="../">
                 <button onClick={clearStorage}>Log Out</button>
             </Link>
-
-            <button onClick={getDate}>Press</button>
 
         </div>
     );

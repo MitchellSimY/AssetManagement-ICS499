@@ -29,12 +29,12 @@ export default function ViewAllRequests() {
             });
     });
 
-    function deleteRequest(id, index) {
+    function deleteRequest(id) {
         setCancelId(id)
         setShow(true)
     }
 
-    function approveRequest(id, index) {
+    function approveRequest(id) {
         fetch(`http://localhost:8080/assetRequest/approveRequest/${id}`, {
             method: "POST",
             headers: { "Content-type": "application/json" },
@@ -62,7 +62,7 @@ export default function ViewAllRequests() {
                     </tr>
                 </thead>
                 <tbody>
-                    {allRequests ? allRequests.map((req, index) => {
+                    {allRequests ? allRequests.map((req) => {
                         console.table(req)
                         return (
                             <tr>
@@ -71,17 +71,18 @@ export default function ViewAllRequests() {
                                 {user?.isAdmin ?
                                     <td>
                                         <button
-                                            onClick={() => { approveRequest(req.id, index) }}>
-                                            Delete Request
+                                            onClick={() => { approveRequest(req.id) }}>
+                                            Approve Request
                                         </button>
                                     </td>
                                     : null}
-                                <td>
-                                    <button
-                                        onClick={() => { deleteRequest(req.id, index) }}>
-                                        Delete Request
-                                    </button>
-                                </td>
+
+                                    <td>
+                                    <button class="btn btn-danger"
+                                            onClick={() => { deleteRequest(req.id) }}>
+                                            Delete Request
+                                        </button>
+                                    </td>
                             </tr>
                         )
                     }) : ""}

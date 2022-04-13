@@ -15,6 +15,7 @@ import BulletinsPage from "./Pages/BulletinBoard/Board.jsx"
 import ScheduleAppointment from "./Pages/Appointments/ScheduleAppointments";
 import ViewAllRequests from "./Pages/AssetRequest/ViewAllRequests";
 import AllUserAsRequests from "./Pages/AssetRequest/AllUserAsRequests";
+import ViewAllAppointments from "./Pages/Appointments/ViewAppointments"
 import _404Page from "./Pages/Login/404Page";
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
                 <Route path="/viewAllBulletins" element={<BulletinsPage />} />
                 <Route path="/scheduleAppointment" element={<ScheduleAppointment />} />
                 <Route path="/viewAllRequests" element={<ViewAllRequests />} />
+                <Route path="/ViewAllAppointments" element={<ViewAllAppointments />} />
                 {/* Error Routes */}
                 <Route path='*' element={<_404Page />} />
               </>

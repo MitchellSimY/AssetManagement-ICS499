@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Grid from '@mui/material/Grid';
 import { Link } from "react-router-dom";
 import BulletinCards from "../BulletinBoard/BulletinCards";
-import HomeStyles from "./HomeStyles.css"
 
 export default function HomeViewBulletins() {
 
