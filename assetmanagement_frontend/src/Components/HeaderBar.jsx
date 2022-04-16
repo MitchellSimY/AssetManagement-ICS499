@@ -39,6 +39,11 @@ export default function HeaderBar() {
         navigate("../scheduleAppointment")
     }
 
+    function navigateToAllUsers(e) {
+        e.preventDefault();
+        navigate("../allUsers")
+    }
+
     function navUserRequests(e) {
         e.preventDefault();
         navigate("../pendingUserAssetRequests")
@@ -73,7 +78,12 @@ export default function HeaderBar() {
                             Schedule IT Help
                         </a>
 
-                        {/* IT Help Link */}
+                        {/* Users Link */}
+                        <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }} onClick={navigateToAllUsers}>
+                            All Users
+                        </a>
+
+                        {/* Pending User reqs */}
                         {user?.isAdmin ?
                             <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }} onClick={navUserRequests}>
                                 Pending User Requests
@@ -86,7 +96,7 @@ export default function HeaderBar() {
 
 
 
-                        <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white" }}>
+                        <a class="navbar-brand" style={{ paddingLeft: '1em', FpaddingTop: '1em', color: "white" }}>
                         </a>
 
                     </div>
