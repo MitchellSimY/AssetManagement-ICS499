@@ -1,27 +1,41 @@
 import * as React from "react";
 import { useState, useEffect, useContext } from "react";
-import { Box, Headphones, Laptop, PersonWorkspace, Printer, Speaker, TabletLandscape, UsbDrive, Cast, InfoCircle } from "react-bootstrap-icons";
+import {
+  Box,
+  Headphones,
+  Laptop,
+  PersonWorkspace,
+  Printer,
+  Speaker,
+  TabletLandscape,
+  UsbDrive,
+  Cast,
+  InfoCircle,
+} from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
-import Grid from '@mui/material/Grid';
+import Grid from "@mui/material/Grid";
 import RequestPopup from "../AssetRequest/RequestPopup";
+import DeletePopup from "../Assets/DeleteAsset"
 import { Button } from "react-bootstrap";
 import { UserContext } from "../../Components/UserContext";
-import AssetStyles from "../Assets/AssetsStyles.css"
-
+import AssetStyles from "../Assets/AssetsStyles.css";
 
 export default function ViewAssets() {
   // States
   const [allAssets, setAllAssets] = useState();
-  const [assetTypeFilter, setAssetTypeFilter] = useState('');
-  const [deviceNameSearch, setDeviceNameSearch] = useState('');
+  const [assetTypeFilter, setAssetTypeFilter] = useState("");
+  const [deviceNameSearch, setDeviceNameSearch] = useState("");
   const [showDetails, setShowDetails] = useState(false);
   const [requestedAsset, setRequestedAsset] = useState();
 
-  const { user } = useContext(UserContext)
+  const { user } = useContext(UserContext);
 
   // Modal configuration
   const [show, setShow] = useState(false);
+  const [showDeletePop, setShowDeletePop] = useState(false);
+  
   const handleClose = () => setShow(false);
+  const handleCloseDelete = () => setShowDeletePop(false);
 
   // Constants
   let navigate = useNavigate();
@@ -55,41 +69,41 @@ export default function ViewAssets() {
     paddingTop: "20rem",
     width: "60rem",
     margin: "auto",
-  }
+  };
 
   function handleAddAsset(e) {
     e.preventDefault();
-    navigate("../addAsset")
+    navigate("../addAsset");
   }
 
   function filterChosen(e) {
-    var chosenAssetType = e.target.getAttribute("keyid")
+    var chosenAssetType = e.target.getAttribute("keyid");
     if (chosenAssetType === "Show all options") {
-      setAssetTypeFilter('')
+      setAssetTypeFilter("");
     } else {
-      setAssetTypeFilter(chosenAssetType)
+      setAssetTypeFilter(chosenAssetType);
     }
   }
 
   function iconSelection(asset) {
     if (asset === "Laptop") {
-      return <Laptop size={30} />
+      return <Laptop size={30} />;
     } else if (asset === "Tablets") {
-      return <TabletLandscape size={30} />
+      return <TabletLandscape size={30} />;
     } else if (asset === "Periphrials") {
-      return <Box size={30} />
+      return <Box size={30} />;
     } else if (asset === "Printer/Scanner") {
-      return <Printer size={30} />
+      return <Printer size={30} />;
     } else if (asset === "Headphones") {
-      return <Headphones size={30} />
+      return <Headphones size={30} />;
     } else if (asset === "Storage Systems") {
-      return <UsbDrive size={30} />
+      return <UsbDrive size={30} />;
     } else if (asset === "Speakers") {
-      return <Speaker size={30} />
+      return <Speaker size={30} />;
     } else if (asset === "Monitors") {
-      return <PersonWorkspace size={30} />
+      return <PersonWorkspace size={30} />;
     } else if (asset === "Docking Stations") {
-      return <Cast size={30} />
+      return <Cast size={30} />;
     }
     return asset;
   }
@@ -106,25 +120,57 @@ export default function ViewAssets() {
     setShow(true);
   }
 
+  function handleDelete(asset) {
+    setRequestedAsset(asset);
+    setShowDetails(false);
+    setShowDeletePop(true);
+  }
+
   return (
     <div>
-      {show ? <RequestPopup show={show} handleClose={handleClose} asset={requestedAsset} showDetails={showDetails} /> : ""}
+      {show ? (
+        <RequestPopup
+          show={show}
+          handleClose={handleClose}
+          asset={requestedAsset}
+          showDetails={showDetails}
+        />
+      ) : (
+        ""
+      )}
+
+      {showDeletePop ? (
+        <DeletePopup
+        showDeletePop={showDeletePop}
+          handleCloseDelete={handleCloseDelete}
+          asset={requestedAsset}
+          showDetails={showDetails}
+        />
+      ) : null}
+
       <br />
       <div style={{ float: "right", paddingRight: "25em" }}>
-
-        {user?.isAdmin ? <button type="button" class="btn btn-success" onClick={handleAddAsset}>Add Assets</button> : null}
-        
+        {user?.isAdmin ? (
+          <button
+            type="button"
+            class="btn btn-success"
+            onClick={handleAddAsset}
+          >
+            Add Assets
+          </button>
+        ) : null}
       </div>
 
       <Grid container spacing={2}>
-        <Grid item xs={1}>
-        </Grid>
+        <Grid item xs={1}></Grid>
 
         <Grid item xs={2}>
           <table style={AssetStyles}>
             <thead>
               <tr>
-                <th scope="col"><h2>Filter Asset Options</h2></th>
+                <th scope="col">
+                  <h2>Filter Asset Options</h2>
+                </th>
               </tr>
             </thead>
             <div class="input-group mb-3">
@@ -134,7 +180,7 @@ export default function ViewAssets() {
                   Search
                 </span>
               </div>
-              <input 
+              <input
                 type="text"
                 class="form-control"
                 placeholder="Asset Name"
@@ -145,11 +191,17 @@ export default function ViewAssets() {
               />
             </div>
 
-
             {assetTypesArray.map((assetOption) => (
-              <tr><h4 onClick={filterChosen} style={AssetStyles} keyid={assetOption}>{assetOption}</h4></tr>
+              <tr>
+                <h4
+                  onClick={filterChosen}
+                  style={AssetStyles}
+                  keyid={assetOption}
+                >
+                  {assetOption}
+                </h4>
+              </tr>
             ))}
-
           </table>
         </Grid>
         <Grid item xs={8}>
@@ -162,58 +214,71 @@ export default function ViewAssets() {
               </tr>
             </thead>
             <tbody>
-
-
-              {
-                allAssets ? allAssets.map(asset => {
-                  if (!(asset.deviceName.toUpperCase().includes(deviceNameSearch.toUpperCase()))) {
-                    return null;
-                  }
-
-                  if (asset.checkoutUserId || asset.hasRequest) {
-                    return null
-                  }
-
-                  if (assetTypeFilter !== '') {
-                    if (asset.deviceCategory !== assetTypeFilter) {
+              {allAssets
+                ? allAssets.map((asset) => {
+                    if (
+                      !asset.deviceName
+                        .toUpperCase()
+                        .includes(deviceNameSearch.toUpperCase())
+                    ) {
                       return null;
                     }
-                  }
 
-                  return (
+                    if (asset.checkoutUserId || asset.hasRequest) {
+                      return null;
+                    }
 
-                    <tr keyid={asset.id}>
+                    if (assetTypeFilter !== "") {
+                      if (asset.deviceCategory !== assetTypeFilter) {
+                        return null;
+                      }
+                    }
 
-                      <th keyid={asset.id} scope="row">{iconSelection(asset.deviceCategory)}</th>
-                      
-                      <td>{asset.deviceName}</td>
-                      
-                      <td>{asset.deviceCategory}</td>
-                      
-                      <td>
+                    return (
+                      <tr keyid={asset.id}>
+                        <th keyid={asset.id} scope="row">
+                          {iconSelection(asset.deviceCategory)}
+                        </th>
 
-                        <Button
-                          variant="primary"
-                          object={asset}
-                          id={asset.id}
-                          onClick={() => {
-                            handleRequest(asset);
-                          }}>
-                          Request
-                        </Button>
+                        <td>{asset.deviceName}</td>
 
-                        {" "}
-                        <InfoCircle size={30}
-                          onClick={() => {
-                            handleAssetInfoClick(asset)
-                          }}
-                          keyid={asset.id} />
+                        <td>{asset.deviceCategory}</td>
 
-                      </td>
-                    </tr>
-                  )
-                })
-                  : ""}
+                        <td>
+                          <Button
+                            variant="primary"
+                            object={asset}
+                            id={asset.id}
+                            onClick={() => {
+                              handleRequest(asset);
+                            }}
+                          >
+                            Request
+                          </Button>
+                          {user?.isAdmin ? (
+                            <Button
+                              variant="danger"
+                              object={asset}
+                              id={asset.id}
+                              onClick={() => {
+                                handleDelete(asset);
+                              }}
+                            >
+                              Delete
+                            </Button>
+                          ) : null}{" "}
+                          <InfoCircle
+                            size={30}
+                            onClick={() => {
+                              handleAssetInfoClick(asset);
+                            }}
+                            keyid={asset.id}
+                          />
+                        </td>
+                      </tr>
+                    );
+                  })
+                : ""}
             </tbody>
           </table>
         </Grid>

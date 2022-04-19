@@ -17,6 +17,7 @@ import ViewAllRequests from "./Pages/AssetRequest/ViewAllRequests";
 import AllUserAsRequests from "./Pages/AssetRequest/AllUserAsRequests";
 import ViewAllAppointments from "./Pages/Appointments/ViewAppointments"
 import AllUsers from "./Pages/Users/AllUsers"
+import AllAppts from "./Pages/Appointments/ViewAllAppt"
 import _404Page from "./Pages/Login/404Page";
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
               <>
                 <Route path="/addAsset" element={<AddAsset />} />
                 <Route path="/pendingUserAssetRequests" element={<AllUserAsRequests/>}/>
+                <Route path="/allAppointments" element={<AllAppts />} />
               </>
               : null}
 
