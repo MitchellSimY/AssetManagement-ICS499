@@ -2,7 +2,7 @@ import * as React from "react";
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../Components/UserContext";
 
-export default function ViewAppointments() {
+export default function ViewAllAppt() {
   const [allAppointments, setAllAppointments] = useState();
   const { user } = useContext(UserContext);
 
@@ -16,9 +16,7 @@ export default function ViewAppointments() {
 
   useEffect(() => {
     fetch(
-      `http://localhost:8080/appointment/getUserAppointment/${
-        user ? user.id : null
-      }`
+      `http://localhost:8080/appointment/getAllAppointments`
     )
       .then((res) => res.json())
       .then((result) => {

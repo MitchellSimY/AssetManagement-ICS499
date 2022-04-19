@@ -42,7 +42,7 @@ export default function HomeViewAppt({ appointments }) {
                             return
                         }
 
-                        if (index < 3) {
+                        if (index >= 3) {
                             return
                         }
                         return (

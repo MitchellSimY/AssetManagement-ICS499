@@ -49,6 +49,11 @@ export default function HeaderBar() {
         navigate("../pendingUserAssetRequests")
     }
 
+    function navAppointments(e) {
+        e.preventDefault();
+        navigate("../allAppointments")
+    }
+
     return (
 
         <div style={HeaderStyle}>
@@ -85,13 +90,18 @@ export default function HeaderBar() {
 
                         {/* Pending User reqs */}
                         {user?.isAdmin ?
+                        <>
                             <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }} onClick={navUserRequests}>
                                 Pending User Requests
                             </a>
+                            <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }} onClick={navAppointments}>
+                                Pending Appointments
+                            </a>
+                            </>
                             : null}
 
                         <a class="navbar-brand" style={{ paddingLeft: '1em', paddingTop: '1em', color: "white", cursor: 'pointer' }}>
-                            {user ? `${user.admin ? `ADMIN USER: ${user.firstName} ${user.lastName}` : `USER: ${user.firstName} ${user.lastName}`}` : "No account signed in"}
+                            {user ? `${user.admin ? `|| ADMIN USER: ${user.firstName} ${user.lastName}` : `|| USER: ${user.firstName} ${user.lastName}`}` : "No account signed in"}
                         </a>
 
 

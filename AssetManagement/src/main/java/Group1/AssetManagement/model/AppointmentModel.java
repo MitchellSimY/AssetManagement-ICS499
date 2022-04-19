@@ -19,6 +19,7 @@ public class AppointmentModel {
 
 
 	private String requestorName, requestedDate, requestedTime;
+	private String issueDescription;
 
 	public int getId() {
 		return id;
@@ -58,6 +59,14 @@ public class AppointmentModel {
 
 	public void setRequestedTime(String requestedTime) {
 		this.requestedTime = requestedTime;
+	}
+
+	public String getIssueDescription() {
+		return issueDescription;
+	}
+
+	public void setIssueDescription(String issueDescription) {
+		this.issueDescription = issueDescription;
 	}
 	
 	

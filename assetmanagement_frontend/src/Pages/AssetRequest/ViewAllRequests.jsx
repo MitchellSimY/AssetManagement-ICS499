@@ -45,6 +45,7 @@ export default function ViewAllRequests() {
 
     return (
         <div>
+            <h1 style={{textAlign: "center"}}>All User Requests</h1>
             {show ?
                 <Confirmation
                     show={show}
@@ -55,6 +56,7 @@ export default function ViewAllRequests() {
                 /> : ""}
             <br />
             <table class="table table-hover" style={tableStyle}>
+                
                 <thead>
                     <tr>
                         <th scope="col">Asset Name</th>
@@ -70,7 +72,7 @@ export default function ViewAllRequests() {
 
                                 {user?.isAdmin ?
                                     <td>
-                                        <button
+                                        <button class="btn btn-primary"
                                             onClick={() => { approveRequest(req.id) }}>
                                             Approve Request
                                         </button>
