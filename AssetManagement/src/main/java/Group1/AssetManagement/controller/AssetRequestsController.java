@@ -42,7 +42,7 @@ public class AssetRequestsController {
 	public List<AssetRequestsModel> getUsersRequests(@PathVariable Integer userId) {
 		return arService.getUsersRequests(userId);
 	}
-	
+
 	@DeleteMapping("/delete/{requestId}")
 	public String delete(@PathVariable Integer requestId) {
 		arService.deleteRequest(requestId);

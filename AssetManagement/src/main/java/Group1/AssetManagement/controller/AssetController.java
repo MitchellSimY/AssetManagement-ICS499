@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Group1.AssetManagement.model.AssetModel;
 import Group1.AssetManagement.service.AssetService;
-//
+
 @RestController
 @RequestMapping("/asset")
 @CrossOrigin
