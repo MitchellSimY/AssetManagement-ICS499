@@ -80,10 +80,9 @@ export default function Login() {
                     />
                 </div>
 
-                {/* Bypassing Captcha */}
-                {/* <button disabled={!captchaVerified} type="submit" class="btn btn-primary">Sign In</button>{" "} */}
+                <button disabled={!captchaVerified} type="submit" class="btn btn-primary">Sign In</button>{" "}
 
-                <button type="submit" class="btn btn-primary">Sign In</button>{" "}
+                {/* <button type="submit" class="btn btn-primary">Sign In</button>{" "} */}
 
                 <button type="button" class="btn btn-secondary" onClick={handleForgotPassword}>Forgot Password</button>
 

@@ -64,23 +64,6 @@ export default function Home() {
             <HomeViewAppts appointments={allAppointments}/>
 
 
-            <br />
-            <br />
-            <br />
-            <br />
-
-
-            {user ? <div><h2>You are now logged in: </h2><h3>
-                {user.firstName} {user.lastName} <br />
-                {user.id}
-                {user.phone} <br />
-                {user.userName} <br />
-                Admin: {user.admin.toString()}</h3></div> : ""}
-
-            <Link to="../">
-                <button onClick={clearStorage}>Log Out</button>
-            </Link>
-
         </div>
     );
 }
