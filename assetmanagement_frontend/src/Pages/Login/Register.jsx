@@ -176,9 +176,9 @@ export default function Register() {
 
                 <br />
                 {/* Bypassing Captcha */}
-                {/* <button disabled={!captchaVerified} type="button" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "} */}
+                <button disabled={!captchaVerified} type="button" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "}
 
-                <button type="button" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "}
+                {/* <button type="button" class="btn btn-primary" onClick={handleRegister}>Create Account</button>{" "} */}
             </form>
         </div>
     );
