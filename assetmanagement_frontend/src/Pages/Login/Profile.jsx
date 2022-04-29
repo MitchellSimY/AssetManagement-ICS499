@@ -30,10 +30,6 @@ export default function Profile() {
         navigate("../")
     }
 
-    function randomFunciton() {
-        console.log(user)
-    }
-
     return (
         <div style={{ paddingLeft: '5rem', paddingTop: "3em" }}>
             <div>
@@ -42,15 +38,6 @@ export default function Profile() {
             </div>
 
             <br />
-
-
-            <button onClick={handleSignOut}>
-                Log Out
-            </button>
-            <button onClick={randomFunciton}>
-                Test
-            </button>
-
             <table class="table table-hover" style={tableStyle}>
                 <thead>
                     <tr>
@@ -60,21 +47,21 @@ export default function Profile() {
                 <tbody>
                     {/* User Data Here */}
                     <tr>
-                        User ID:
-                        {user?.id}
+                        <td>User ID:</td>
+                        <td>{user?.id}</td>
                     </tr>
                     <tr>
-                        Name:
-                        {user?.firstName} {user?.lastName}
+                        <td>Name:</td>
+                        <td>{user?.firstName} {user?.lastName}</td>
                     </tr>
                     <tr>
-                        Email:
-                        {user?.email}
+                        <td>Email:</td>
+                        <td>{user?.email}</td>
                     </tr>
 
                     <tr>
-                        Phone:
-                        {user?.phone}
+                        <td>Phone:</td>
+                        <td>{user?.phone}</td>
                     </tr>
                 </tbody>
             </table>
@@ -104,6 +91,10 @@ export default function Profile() {
                     }) : null}
                 </tbody>
             </table>
+
+            <button onClick={handleSignOut} class="btn btn-primary">
+                Log Out
+            </button>
 
 
         </div>
