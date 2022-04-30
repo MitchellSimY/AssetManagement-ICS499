@@ -21,6 +21,26 @@ public class AssetServiceImplementation implements AssetService {
 	}
 	
 	@Override
+	public boolean returnAsset(AssetModel userAsset) {
+		List<AssetModel> allAssets = getAllAssets();
+		
+		for (AssetModel asset : allAssets) {
+			if (asset.getCheckoutUserId() != null) {
+				if (asset.getCheckoutUserId().equals(userAsset.getCheckoutUserId())
+						&& asset.getId() == userAsset.getId()) {
+					asset.setCheckoutUserId(null);
+					asset.setCheckedOut(false);
+					assetRepo.flush();
+				}
+			}
+
+		}
+		
+		
+		return true;
+	}
+	
+	@Override
 	public List<AssetModel> getAllAssets() {
 		return assetRepo.findAll();
 	}

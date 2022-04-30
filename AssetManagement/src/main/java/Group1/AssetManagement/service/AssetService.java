@@ -7,6 +7,8 @@ import Group1.AssetManagement.model.AssetModel;
 public interface AssetService {
 	public AssetModel saveAsset(AssetModel asset);
 	
+	public boolean returnAsset(AssetModel asset);
+	
 	public List<AssetModel> getAllAssets();
 	
 	public List<AssetModel> getAllAvailableAssets();
@@ -16,4 +18,5 @@ public interface AssetService {
 	public List<AssetModel> getUsersAssets(Integer id);
 	
 	public boolean deleteAsset(Integer id);
+	
 }

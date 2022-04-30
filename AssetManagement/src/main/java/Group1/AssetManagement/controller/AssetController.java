@@ -30,6 +30,13 @@ public class AssetController {
 		return "Asset successfully added";
 	}
 	
+	@PostMapping("/returnAsset")
+	public String returnAsset(@RequestBody AssetModel asset) {
+		assetService.returnAsset(asset);
+		
+		return "Asset Returned";
+	}
+	
 	@GetMapping("/getAllAssets")
 	public List<AssetModel> getAllAssets() {
 		return assetService.getAllAssets();

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 export default function AllUserAsRequests() {
 
     const [allReqs, setAllReqs] = useState();
+    const [showDenialConfrmation, setShowDentialConfirmation] = useState(false)
 
     const tableStyle = {
         textAlign: "center",
@@ -37,6 +38,8 @@ export default function AllUserAsRequests() {
     }
 
     function handleDeny(reqId) {
+        console.log(reqId)
+        setShowDentialConfirmation(true)
         fetch(`http://localhost:8080/assetRequest/delete/${reqId}`, {
             method: "DELETE",
             headers: { "Content-type": "application/json" },
@@ -48,7 +51,11 @@ export default function AllUserAsRequests() {
     return (
         <div>
             <br />
+            {showDenialConfrmation ? <div class="alert alert-dark" role="alert">
+                An email has since been seent to the user regarding the denial of their assset.
+            </div> : null}
             <table class="table table-hover" style={tableStyle}>
+                
                 <thead>
                     <tr>
                         <th scope="col">Requestor</th>
@@ -58,6 +65,7 @@ export default function AllUserAsRequests() {
                 </thead>
 
                 <tbody>
+                <br />
                     {allReqs ? allReqs.map((req, index) => {
                         return (
                             <tr>
@@ -66,7 +74,7 @@ export default function AllUserAsRequests() {
                                 <td>
                                     <button class="btn btn-primary" onClick={() => { handleApprove(req.id) }}>Approve</button> {" "}
 
-                                    <button class="btn btn-danger" onClick={handleDeny}>Deny</button>
+                                    <button class="btn btn-danger" onClick={() => { handleDeny(req.id) }}>Deny</button>
                                 </td>
                             </tr>
                         )

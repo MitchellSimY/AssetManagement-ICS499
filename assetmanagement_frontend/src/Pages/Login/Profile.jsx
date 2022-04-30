@@ -7,6 +7,7 @@ export default function Profile() {
     let navigate = useNavigate();
     const { user, setUser } = useContext(UserContext);
     const [allAssets, setAllAssets] = useState()
+    const [assetReturned, setAssetReturned] = useState(false)
 
 
     const tableStyle = {
@@ -28,6 +29,18 @@ export default function Profile() {
     function handleSignOut() {
         setUser();
         navigate("../")
+    }
+
+    function handleReturnAsset(asset) {
+        console.log("returning asset")
+        console.table(asset)
+        fetch("http://localhost:8080/asset/returnAsset", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(asset),
+        }).then(() => {
+            setAssetReturned(true)
+        });
     }
 
     return (
@@ -66,7 +79,10 @@ export default function Profile() {
                 </tbody>
             </table>
 
-            <table class="table table-hover" style={{width: '30rem'}}>
+            <table class="table table-hover" style={{ width: '30rem' }}>
+                {assetReturned ? <div class="alert alert-dark" role="alert">
+                    The asset has since been returned
+                </div> : null}
                 <tr>
                     <th>
                         Asset Name
@@ -74,8 +90,11 @@ export default function Profile() {
                     <th>
                         Asset Type
                     </th>
+                    <th>
+                        Action
+                    </th>
                 </tr>
-                <tbody > 
+                <tbody >
                     {allAssets ? allAssets.map(asset => {
 
                         return (
@@ -85,6 +104,9 @@ export default function Profile() {
                                 </td>
                                 <td>
                                     {asset.deviceCategory}
+                                </td>
+                                <td>
+                                    <button onClick={() => { handleReturnAsset(asset) }} class="btn btn-primary">Return Asset</button>
                                 </td>
                             </tr>
                         )
