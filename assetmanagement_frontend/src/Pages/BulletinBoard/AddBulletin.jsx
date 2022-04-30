@@ -17,8 +17,7 @@ export default function AddBulletin() {
   function onSubmit(e) {
       e.preventDefault();
 
-      var timeStamp = "today"
-      const bulletin = {announcementType, message, title, timeStamp};
+      const bulletin = {announcementType, message, title};
 
       fetch("http://localhost:8080/bulletin/add", {
         method: "POST",
@@ -69,7 +68,7 @@ export default function AddBulletin() {
           </select>
         </div>
 
-            <button type="submit" onSubmit={onSubmit} class="btn btn-success">Submit</button>
+            <button type="submit" onClick={onSubmit} class="btn btn-success">Submit</button>
         </form>
     </div>
   );
