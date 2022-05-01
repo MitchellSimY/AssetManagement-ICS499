@@ -53,6 +53,7 @@ export default function ViewAllAppt() {
             <th scope="col">Appointment Date</th>
             <th scope="col">Appointment Time</th>
             <th scope="col">Description</th>
+            <th scope="col">Requestor Name</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -73,6 +74,7 @@ export default function ViewAllAppt() {
                     <td>{appts.requestedDate}</td>
                     <td>{appts.requestedTime}</td>
                     <td>{appts.issueDescription}</td>
+                    <td>{appts.requestorName}</td>
                     <td>
                       <button
                         class="btn btn-danger"
