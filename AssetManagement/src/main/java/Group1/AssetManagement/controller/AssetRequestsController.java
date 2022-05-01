@@ -53,6 +53,4 @@ public class AssetRequestsController {
 	public boolean approveRequest(@PathVariable Integer reqId) {
 		return arService.approveRequest(reqId);
 	}
-	
-	// RELINQUISH ASSET
 }

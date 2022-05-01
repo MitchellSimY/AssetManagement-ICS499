@@ -20,6 +20,7 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [captchaVerified, setCaptchaVerified] = useState(false);
     const [captchaLoaded, setCaptchaLoaded] = useState(false)
+    const [contactIT, setContactIT] = useState(false)
 
     function handleSignIn(e) {
         e.preventDefault();
@@ -34,7 +35,7 @@ export default function Login() {
 
     function handleForgotPassword(e) {
         e.preventDefault();
-
+        setContactIT(true)
     }
 
     function verifyCaptcha() {
@@ -55,7 +56,9 @@ export default function Login() {
                 Please login to continue
             </h2>
 
-            
+            {contactIT ? <div class="alert alert-dark" role="alert">
+                Please call the local IT at 123-456-7890 to reset your password
+            </div> : null}
 
             <form onSubmit={handleSignIn}>
                 <div class="input-group mb-3">
